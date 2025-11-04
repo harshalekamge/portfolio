@@ -62,12 +62,20 @@ const Hero = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <div className="photo-container">
+        <div className="photo-container">
+          {true ? ( // change 'true' to a condition if dynamic later
+            <img 
+              src="/images/myphoto.jpg" 
+              alt="Harsha Lekamge" 
+              className="profile-photo"
+            />
+          ) : (
             <div className="photo-placeholder">
               <span>Your Photo</span>
               <p>Add your professional photo here</p>
             </div>
-          </div>
+          )}
+        </div>
         </motion.div>
       </div>
     </section>
