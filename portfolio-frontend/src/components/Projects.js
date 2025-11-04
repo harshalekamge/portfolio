@@ -19,8 +19,13 @@ const Projects = () => {
     },
     {
       id: 2,
-      title: 'E-Commerce Platform',
+      title: 'DEMO - E-Commerce Platform',
       description: 'A full-stack e-commerce solution with user authentication, payment integration, inventory management, and real-time order tracking.',
+      description: (
+        <>
+          <span style={{ color: 'Red' }}>⚠️ Note: This content is currently under maintenance.</span>
+        </>
+      ),
       icon: FaShoppingCart,
       gradient: 'from-green-500 to-teal-600',
       technologies: ['React', 'Node.js', 'MongoDB'],
@@ -29,8 +34,13 @@ const Projects = () => {
     },
     {
       id: 3,
-      title: 'Machine Learning Model',
+      title: 'DEMO - Machine Learning Model',
       description: 'Developed a predictive model for customer churn analysis using advanced machine learning algorithms with 92% accuracy and deployed using Flask API.',
+      description: (
+        <>
+          <span style={{ color: 'Red' }}>⚠️ Note: This content is currently under maintenance.</span>
+        </>
+      ),
       icon: FaBrain,
       gradient: 'from-purple-500 to-pink-600',
       technologies: ['Python', 'Scikit-learn', 'Flask'],
@@ -39,8 +49,13 @@ const Projects = () => {
     },
     {
       id: 4,
-      title: 'Task Management App',
+      title: 'DEMO - Task Management App',
       description: 'A responsive web application for project management with drag-and-drop functionality, real-time collaboration, and progress tracking features.',
+      description: (
+        <>
+          <span style={{ color: 'Red' }}>⚠️ Note: This content is currently under maintenance.</span>
+        </>
+      ),
       icon: FaMobileAlt,
       gradient: 'from-red-500 to-orange-600',
       technologies: ['React', 'Express', 'Socket.io'],
@@ -49,8 +64,13 @@ const Projects = () => {
     },
     {
       id: 5,
-      title: 'News Sentiment Analyzer',
+      title: 'DEMO - News Sentiment Analyzer',
       description: 'Natural Language Processing application that analyzes news articles sentiment using BERT model and provides real-time sentiment trends and insights.',
+      description: (
+        <>
+          <span style={{ color: 'Red' }}>⚠️ Note: This content is currently under maintenance.</span>
+        </>
+      ),
       icon: FaNewspaper,
       gradient: 'from-indigo-500 to-blue-600',
       technologies: ['Python', 'BERT', 'FastAPI'],
@@ -59,8 +79,13 @@ const Projects = () => {
     },
     {
       id: 6,
-      title: 'API Gateway Service',
+      title: 'DEMO - API Gateway Service',
       description: 'Microservices architecture with API gateway, authentication middleware, rate limiting, and monitoring capabilities built with Node.js and Docker.',
+      description: (
+        <>
+          <span style={{ color: 'Red' }}>⚠️ Note: This content is currently under maintenance.</span>
+        </>
+      ),
       icon: FaServer,
       gradient: 'from-teal-500 to-cyan-600',
       technologies: ['Node.js', 'Docker', 'Redis'],
