@@ -93,6 +93,18 @@
   color: #6366f1;
 }
 
+/* 🤖 AI, LLMs & Data Technologies */
+.skill-category:nth-child(7) .skill-level {
+  background: rgba(34, 197, 94, 0.15); /* green-500 with opacity */
+  color: #22c55e; /* green-500 */
+}
+
+/* 🗄️ Database Technologies */
+.skill-category:nth-child(8) .skill-level {
+  background: rgba(14, 165, 233, 0.15); /* teal-500 with opacity */
+  color: #0ea5e9; /* teal-500 */
+}
+
 /* Color classes for categories */
 .text-blue-600 { color: #2563eb; }
 .text-green-600 { color: #16a34a; }

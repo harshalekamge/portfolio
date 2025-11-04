@@ -126,7 +126,7 @@ const Contact = () => {
                     <FaWhatsapp/><span>WhatsApp</span>
                   </a>
                   {/* Blog */}
-                  <a href="https://yourblogsite.com" target="_blank" rel="noopener noreferrer" className="social-link blog">
+                  <a href="" target="_blank" rel="noopener noreferrer" className="social-link blog">
                     <FaGlobe className="mr-2" /><span> Blog</span>
                   </a>
                 </div>
