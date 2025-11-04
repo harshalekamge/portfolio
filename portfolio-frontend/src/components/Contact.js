@@ -112,17 +112,17 @@ const Contact = () => {
                 <h3>Let's Connect</h3>
                 
                 <div className="social-links-horizontal">
-                  <a href="https://linkedin.com/in/harsha-lekamge" target="_blank" rel="noopener noreferrer" className="social-link linkedin">
+                  <a href="https://www.linkedin.com/in/harsha-lekamge/" target="_blank" rel="noopener noreferrer" className="social-link linkedin">
                     <FaLinkedin />
                     <span>LinkedIn</span>
                   </a>
                   
-                  <a href="https://github.com/harsha-lekamge" target="_blank" rel="noopener noreferrer" className="social-link github">
+                  <a href="https://github.com/harshalekamge" target="_blank" rel="noopener noreferrer" className="social-link github">
                     <FaGithub />
                     <span>GitHub</span>
                   </a>
                       {/* WhatsApp */}
-                  <a href="https://wa.me/94771234567" target="_blank" rel="noopener noreferrer" className="social-link whatsapp">
+                  <a href="https://wa.me/94778753792" target="_blank" rel="noopener noreferrer" className="social-link whatsapp">
                     <FaWhatsapp/><span>WhatsApp</span>
                   </a>
                   {/* Blog */}
@@ -135,11 +135,14 @@ const Contact = () => {
             </motion.div>
             
             <motion.form className="contact-form" onSubmit={handleSubmit} variants={itemVariants}>
-              <h3>Send Me a Message</h3>
-              
+              {
+              //<h3>Send Me a Message</h3>
+              }
+              <h4 style={{color: 'red' }}>⚠️ Note: The contact form is currently under maintenance.</h4><br/><h6 style={{color: 'red' }}> I apologize for the inconvenience — it’s not working at the moment, but I’ll have it fixed soon. In the meantime, please feel free to reach out via my social links. Thank you for your understanding! 💬</h6>
+              <br/>
               <div className="form-row">
                 <div className="form-group">
-                  <label htmlFor="firstName">First Name</label>
+                  <label htmlFor="firstName" style={{ textDecoration: 'line-through' }}>First Name</label>
                   <input
                     type="text"
                     id="firstName"
@@ -151,7 +154,7 @@ const Contact = () => {
                 </div>
                 
                 <div className="form-group">
-                  <label htmlFor="lastName">Last Name</label>
+                  <label htmlFor="lastName" style={{ textDecoration: 'line-through' }}>Last Name</label>
                   <input
                     type="text"
                     id="lastName"
@@ -164,7 +167,7 @@ const Contact = () => {
               </div>
               
               <div className="form-group">
-                <label htmlFor="email">Email Address</label>
+                <label htmlFor="email" style={{ textDecoration: 'line-through' }}>Email Address</label>
                 <input
                   type="email"
                   id="email"
@@ -176,7 +179,7 @@ const Contact = () => {
               </div>
               
               <div className="form-group">
-                <label htmlFor="subject">Subject</label>
+                <label htmlFor="subject" style={{ textDecoration: 'line-through' }}>Subject</label>
                 <input
                   type="text"
                   id="subject"
@@ -188,7 +191,7 @@ const Contact = () => {
               </div>
               
               <div className="form-group">
-                <label htmlFor="message">Message</label>
+                <label htmlFor="message" style={{ textDecoration: 'line-through' }}>Message</label>
                 <textarea
                   id="message"
                   name="message"
