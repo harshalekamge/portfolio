@@ -47,8 +47,8 @@ const Navbar = () => {
   const navItems = [
     { id: 'home', label: 'Home', icon: FaHome },
     { id: 'about', label: 'About', icon: FaUser },
-    { id: 'skills', label: 'Skills', icon: FaCode },
     { id: 'projects', label: 'Projects', icon: FaProjectDiagram },
+    { id: 'skills', label: 'Skills', icon: FaCode },
     { id: 'contact', label: 'Contact', icon: FaEnvelope }
   ];
 
