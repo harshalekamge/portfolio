@@ -1,14 +1,26 @@
 ﻿import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaGithub, FaWhatsapp, FaGlobe, FaPaperPlane } from 'react-icons/fa';
+import {
+  FaEnvelope,
+  FaPhone,
+  FaMapMarkerAlt,
+  FaLinkedin,
+  FaGithub,
+  FaWhatsapp,
+  FaGlobe,
+  FaPaperPlane,
+  FaFacebook,
+  FaInstagram
+} from 'react-icons/fa';
+// Import supabase from the parent folder (src/)
+import { supabase } from '../supabaseClient'; 
 import './Contact.css';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    name: '',
     email: '',
-    subject: '',
+    phone: '',
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -22,14 +34,39 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validation: Ensure either email or phone is provided
+    if (!formData.email && !formData.phone) {
+      alert('Please provide either an Email Address or a Phone Number so I can get back to you.');
+      return;
+    }
+
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      alert('Thank you for your message! I will get back to you soon.');
-      setFormData({ firstName: '', lastName: '', email: '', subject: '', message: '' });
+
+    try {
+      // Sending data to Supabase table
+      const { error } = await supabase
+        .from('contact_submissions')
+        .insert([
+          { 
+            name: formData.name, 
+            email: formData.email, 
+            phone: formData.phone, 
+            message: formData.message 
+          }
+        ]);
+
+      if (error) throw error;
+
+      alert('Thank you! Your message has been sent successfully.');
+      // Reset form
+      setFormData({ name: '', email: '', phone: '', message: '' });
+    } catch (error) {
+      console.error('Error:', error.message);
+      alert('Oops! Something went wrong. Please try again later.');
+    } finally {
       setIsSubmitting(false);
-    }, 2000);
+    }
   };
 
   const containerVariants = {
@@ -81,8 +118,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h4>Email</h4>
-                      <p>lekamge.h2024@gmail.com
-</p>
+                      <p>lekamge.h2024@gmail.com</p>
                     </div>
                   </div>
                   
@@ -121,79 +157,99 @@ const Contact = () => {
                     <FaGithub />
                     <span>GitHub</span>
                   </a>
-                      {/* WhatsApp */}
+
                   <a href="https://wa.me/94778753792" target="_blank" rel="noopener noreferrer" className="social-link whatsapp">
                     <FaWhatsapp/><span>WhatsApp</span>
                   </a>
-                  {/* Blog */}
-                  <a href="" target="_blank" rel="noopener noreferrer" className="social-link blog">
+
+                  <a href="#" target="_blank" rel="noopener noreferrer" className="social-link blog">
                     <FaGlobe className="mr-2" /><span> Blog</span>
                   </a>
+                  <a
+                    href="https://www.facebook.com/harsha.lekamgeiii.1?mibextid=rS40aB7S9Ucbxw6v"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="social-link facebook"
+                  >
+                    <span>Facebook</span>
+                  </a>
+
+                  <a
+                    href="https://www.instagram.com/harsha_lekamge?igsh=enJyeW45N25sY3lm&utm_source=ig_contact_invite"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="social-link instagram"
+                  >
+                    <FaInstagram />
+                    <span>Instagram</span>
+                  </a>
+
+                  <a
+                    href="https://www.onebillionlabs.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="social-link website"
+                  >
+                    <FaGlobe />
+                    <span>OneBillionLabs</span>
+                  </a>
+
                 </div>
               </div>
-              
             </motion.div>
             
             <motion.form className="contact-form" onSubmit={handleSubmit} variants={itemVariants}>
-              {
               <h3>Send Me a Message</h3>
-              }
+              <p style={{ fontSize: '0.85rem', marginBottom: '1.5rem', color: '#666' }}>
+                Please provide your name and at least one way to contact you (Email or Phone).
+              </p>
+
+              <div className="form-group">
+                <label htmlFor="name">Full Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Enter your name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              
               <div className="form-row">
                 <div className="form-group">
-                  <label htmlFor="firstName" style={{ textDecoration: 'line-through' }}>First Name</label>
+                  <label htmlFor="email">Email Address</label>
                   <input
-                    type="text"
-                    id="firstName"
-                    name="firstName"
-                    value={formData.firstName}
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="example@mail.com"
+                    value={formData.email}
                     onChange={handleChange}
-                    required
                   />
                 </div>
                 
                 <div className="form-group">
-                  <label htmlFor="lastName" style={{ textDecoration: 'line-through' }}>Last Name</label>
+                  <label htmlFor="phone">Phone Number</label>
                   <input
                     type="text"
-                    id="lastName"
-                    name="lastName"
-                    value={formData.lastName}
+                    id="phone"
+                    name="phone"
+                    placeholder="+94 ..."
+                    value={formData.phone}
                     onChange={handleChange}
-                    required
                   />
                 </div>
               </div>
               
               <div className="form-group">
-                <label htmlFor="email" style={{ textDecoration: 'line-through' }}>Email Address</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              
-              <div className="form-group">
-                <label htmlFor="subject" style={{ textDecoration: 'line-through' }}>Subject</label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              
-              <div className="form-group">
-                <label htmlFor="message" style={{ textDecoration: 'line-through' }}>Message</label>
+                <label htmlFor="message">Message</label>
                 <textarea
                   id="message"
                   name="message"
                   rows="5"
+                  placeholder="Tell me about your project or inquiry..."
                   value={formData.message}
                   onChange={handleChange}
                   required
@@ -205,8 +261,14 @@ const Contact = () => {
                 className="submit-btn"
                 disabled={isSubmitting}
               >
-                <FaPaperPlane />
-                {isSubmitting ? 'Sending...' : 'Send Message'}
+                {isSubmitting ? (
+                  <>Sending...</>
+                ) : (
+                  <>
+                    <FaPaperPlane style={{ marginRight: '8px' }} />
+                    Send Message
+                  </>
+                )}
               </button>
             </motion.form>
           </div>
