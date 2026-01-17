@@ -136,10 +136,8 @@ const Contact = () => {
             
             <motion.form className="contact-form" onSubmit={handleSubmit} variants={itemVariants}>
               {
-              //<h3>Send Me a Message</h3>
+              <h3>Send Me a Message</h3>
               }
-              <h4 style={{color: 'red' }}>⚠️ Note: The contact form is currently under maintenance.</h4><br/><h6 style={{color: 'red' }}> I apologize for the inconvenience — it’s not working at the moment, but I’ll have it fixed soon. In the meantime, please feel free to reach out via my social links. Thank you for your understanding! 💬</h6>
-              <br/>
               <div className="form-row">
                 <div className="form-group">
                   <label htmlFor="firstName" style={{ textDecoration: 'line-through' }}>First Name</label>
