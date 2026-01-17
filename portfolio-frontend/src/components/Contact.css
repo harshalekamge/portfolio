@@ -275,6 +275,71 @@
   transform: none;
 }
 
+.social-card h3 {
+  margin-bottom: 16px;
+  font-size: 1.2rem;
+  color: #000000;
+}
+
+.social-links-horizontal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.social-link svg {
+  font-size: 1.2rem;
+}
+
+.social-link.website {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 16px;
+  border-radius: 10px;
+
+  width: auto;              /* ✅ allow content-based width */
+  min-width: max-content;   /* ✅ prevents text clipping */
+  white-space: nowrap;      /* ✅ keep words on one line */
+
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #4f46e5;
+  background: rgba(220, 185, 255, 0.4);
+  text-decoration: none;
+
+  transition: all 0.25s ease;
+}
+
+.social-link.facebook {
+  background: #1877f2;
+}
+
+.social-link.instagram {
+  background: linear-gradient(
+    45deg,
+    #f58529,
+    #dd2a7b,
+    #8134af,
+    #515bd4
+  );
+}
+
+
+
 @media (max-width: 768px) {
   .contact-wrapper {
     grid-template-columns: 1fr;
