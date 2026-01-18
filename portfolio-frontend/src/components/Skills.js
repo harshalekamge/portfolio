@@ -182,7 +182,9 @@ const Skills = () => {
       skills: [
         { name: 'MySQL', level: 'Intermediate', icon: SiMysql },
         { name: 'MongoDB', level: 'Advanced', icon: SiMongodb },
-        { name: 'SQL', level: 'Advanced', icon: FaDatabase }
+        { name: 'SQL', level: 'Advanced', icon: FaDatabase },
+        { name: 'Supabase', level: 'Advanced', icon: FaDatabase }
+
       ]
     }
   ];
