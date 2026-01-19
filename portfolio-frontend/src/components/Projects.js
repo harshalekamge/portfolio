@@ -32,7 +32,7 @@ const Projects = () => {
       id: 3,
       title: 'Saloon Velora Web Site',
       description:
-        'A premium, AI-powered salon website developed with React 19 and TypeScript. Combines luxury design, real-time 3D visuals, and an intelligent AI beauty assistant to create an immersive, modern, and responsive brand experience.',
+        'A premium, AI-powered salon website developed with React 19 and TypeScript. Combines luxury design, real-time 3D visuals, and an intelligent AI beauty assistant to create an immersive, modern, and responsive brand experience',
       gradient: 'from-purple-500 to-pink-600',
       image: '/images/SaloonVelora.png',
       technologies: ['React', 'Firebase', 'Responsive Design', 'Branding', 'TypeScript', 'Tested'],
