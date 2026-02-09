@@ -2,68 +2,134 @@
 <html lang="en">
   <head>
     <!-- Google Site Verification -->
-    <meta name="google-site-verification" content="xQaXn9ZHVScxNokxcgRYuEu-PzMcJaoYdAM1wpC6JZA" />
+    <meta
+      name="google-site-verification"
+      content="xQaXn9ZHVScxNokxcgRYuEu-PzMcJaoYdAM1wpC6JZA"
+    />
 
+    <!-- Basic Meta -->
     <meta charset="utf-8" />
-
-    <!-- FAVICON (CRITICAL FOR GOOGLE SEARCH) -->
-    <link rel="icon" href="/favicon.ico" sizes="48x48" />
-    <link rel="icon" href="/favicon.ico" sizes="96x96" />
-    <link rel="icon" href="/favicon.ico" sizes="192x192" />
-
-    <!--new codes for new iconset from favicon.io-->
-    <link rel="icon" type="image/png" sizes="192x192" href="%PUBLIC_URL%/android-chrome-192x192.png" />
-    <link rel="icon" type="image/png" sizes="512x512" href="%PUBLIC_URL%/android-chrome-512x512.png" />
-
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16x16.png" />
-
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/apple-touch-icon.png" />
-    <link rel="manifest" href="%PUBLIC_URL%/site.webmanifest" />
-
-    <!-- Apple Touch Icon 
-    <link rel="apple-touch-icon" href="/logo192.png" /> -->
-
-    <!-- Viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <!-- Theme color -->
     <meta name="theme-color" content="#000000" />
 
-    <!--canonical-->
+    <!-- Canonical -->
     <link rel="canonical" href="https://portfolio.harshalekamge.com/" />
 
     <!-- SEO Meta Description -->
     <meta
       name="description"
-      content="Portfolio of Harsha Lekamge – Web Developer, Designer, and Creator. Explore projects, skills, and contact information."
+      content="Portfolio of Harsha Lekamge – Web Developer, Software Engineering Undergraduate, and Data Scientist from Sri Lanka. Explore projects, skills, and contact information."
     />
 
-    <!-- Web App Manifest -->
-    <link rel="manifest" href="/manifest.json" />
-
-    <link rel="canonical" href="https://portfolio.harshalekamge.com/" />
+    <!-- Favicon & PWA -->
+    <link
+      rel="icon"
+      href="%PUBLIC_URL%/favicon.ico"
+      sizes="16x16 32x32 48x48 96x96 192x192"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="%PUBLIC_URL%/apple-touch-icon.png"
+    />
+    <link rel="manifest" href="%PUBLIC_URL%/site.webmanifest" />
 
     <!-- Title -->
-    <title>Harsha Lekamge – Portfolio</title>
+    <title>Harsha Lekamge – Portfolio | Software Engineer & Data Scientist</title>
 
     <!-- Open Graph -->
     <meta property="og:title" content="Harsha Lekamge – Portfolio" />
-    <meta property="og:description" content="Portfolio of Harsha Lekamge – Web Developer, Designer, and Creator." />
+    <meta
+      property="og:description"
+      content="Portfolio of Harsha Lekamge – Web Developer, Software Engineering Undergraduate, and Data Scientist."
+    />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://portfolio.harshalekamge.com/" />
-    <meta property="og:image" content="/logo192.png" />
+    <meta
+      property="og:image"
+      content="https://portfolio.harshalekamge.com/logo192.png"
+    />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Harsha Lekamge – Portfolio" />
-    <meta name="twitter:description" content="Portfolio of Harsha Lekamge – Web Developer, Designer, and Creator." />
-    <meta name="twitter:image" content="/logo192.png" />
+    <meta
+      name="twitter:description"
+      content="Portfolio of Harsha Lekamge – Web Developer, Software Engineering Undergraduate, and Data Scientist."
+    />
+    <meta
+      name="twitter:image"
+      content="https://portfolio.harshalekamge.com/logo192.png"
+    />
+
+    <!-- Schema.org Person -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Harsha Lekamge",
+        "url": "https://portfolio.harshalekamge.com/",
+        "image": "https://portfolio.harshalekamge.com/logo192.png",
+        "email": "mailto:lekamge.h2024@gmail.com",
+        "jobTitle": "Web Developer, Software Engineering Undergraduate, Data Scientist",
+        "description": "Official portfolio of Harsha Lekamge, showcasing projects, skills, and experience in web development, software engineering, and data science.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "Sri Lanka"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/harshalekamge",
+          "https://github.com/harshalekamge"
+        ]
+      }
+    </script>
   </head>
 
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <!-- SEO fallback content (Google-visible, UI-hidden) -->
+    <section
+      aria-hidden="true"
+      style="
+        position: absolute;
+        left: -9999px;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      "
+    >
+      <h1>Harsha Lekamge</h1>
+      <p>
+        Official portfolio of Harsha Lekamge, a Web Developer, Software Engineering
+        Undergraduate, and Data Scientist from Sri Lanka.
+      </p>
+    </section>
+
+    <!-- React root (DO NOT REMOVE) -->
     <div id="root"></div>
+
+    <!-- Noscript fallback -->
+    <noscript>
+      <div
+        style="
+          background-color: #111;
+          color: #fff;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          padding: 20px;
+          font-family: Arial, sans-serif;
+          position: fixed;
+          top: 0;
+          left: 0;
+          z-index: 9999;
+        "
+      >
+        ⛔ JavaScript is disabled.<br />
+        Please enable JavaScript to view this portfolio.
+      </div>
+    </noscript>
   </body>
 </html>
