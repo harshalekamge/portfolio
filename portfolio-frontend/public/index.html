@@ -9,32 +9,46 @@
 
     <!-- Basic Meta -->
     <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
+
+    <!-- Language & Location -->
+    <meta name="language" content="en" />
+    <meta name="geo.region" content="LK" />
+    <meta name="geo.placename" content="Sri Lanka" />
 
     <!-- Canonical -->
     <link rel="canonical" href="https://portfolio.harshalekamge.com/" />
 
-    <!-- SEO Meta Description -->
+    <!-- Title -->
+    <title>
+      Harsha Lekamge – Software Engineer & Data Scientist in Sri Lanka
+    </title>
+
+    <!-- Primary SEO Description -->
     <meta
       name="description"
-      content="Harsha Lekamge is a Software Engineer and Data Scientist from Sri Lanka specializing in web development, information technology, and modern software solutions. This is Harsha Lekamge Portfolio"
+      content="Portfolio of Harsha Lekamge, Software Engineer, Web Developer, and Data Scientist from Sri Lanka. View projects, technical skills, professional experience, and contact details."
     />
 
-    <!-- SEO Keywords (secondary signal, not critical but okay to include) -->
+    <!-- Keywords (Light Usage) -->
     <meta
       name="keywords"
-      content="Harsha Lekamge, Harsha Lekamge Portfolio, Software Engineer, Data Scientist, Software Engineer Sri Lanka, Data Scientist Sri Lanka, Web Developer, Web Development, Information Technology, IT Sri Lanka"
+      content="Harsha Lekamge, Software Engineer Sri Lanka, Data Scientist Sri Lanka, Web Developer, Portfolio, React Developer, Node.js Developer, Full Stack Developer"
     />
 
     <!-- Robots -->
-    <meta name="robots" content="index, follow" />
+    <meta
+      name="robots"
+      content="index, follow, max-snippet:-1, max-image-preview:large"
+    />
 
-    <!-- Favicon & PWA -->
+    <!-- Favicons -->
     <link
       rel="icon"
       href="%PUBLIC_URL%/favicon.ico"
-      sizes="16x16 32x32 48x48 96x96 192x192"
+      sizes="16x16 32x32 48x48"
     />
     <link
       rel="apple-touch-icon"
@@ -42,14 +56,20 @@
     />
     <link rel="manifest" href="%PUBLIC_URL%/site.webmanifest" />
 
-    <!-- Title -->
-    <title>Harsha Lekamge | Harsha Lekamge Portfolio | Software Engineer & Data Scientist</title>
+    <!-- Performance: Preconnect & DNS Prefetch -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
 
-    <!-- Open Graph -->
-    <meta property="og:title" content="Harsha Lekamge | Software Engineer & Data Scientist | Portfolio" />
+    <!-- Open Graph (Social Sharing) -->
+    <meta
+      property="og:title"
+      content="Harsha Lekamge – Software Engineer & Data Scientist"
+    />
     <meta
       property="og:description"
-      content="Software Engineer and Data Scientist from Sri Lanka with expertise in web development and information technology."
+      content="Official portfolio of Harsha Lekamge showcasing software projects, data science work, and professional experience."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://portfolio.harshalekamge.com/" />
@@ -57,20 +77,24 @@
       property="og:image"
       content="https://portfolio.harshalekamge.com/logo192.png"
     />
+    <meta property="og:site_name" content="Harsha Lekamge Portfolio" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Harsha Lekamge – Portfolio" />
+    <meta
+      name="twitter:title"
+      content="Harsha Lekamge – Software Engineer & Data Scientist"
+    />
     <meta
       name="twitter:description"
-      content="Software Engineer and Data Scientist from Sri Lanka."
+      content="Explore the professional portfolio of Harsha Lekamge from Sri Lanka."
     />
     <meta
       name="twitter:image"
       content="https://portfolio.harshalekamge.com/logo192.png"
     />
 
-    <!-- Schema.org Person -->
+    <!-- Schema: Person -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -78,60 +102,69 @@
         "name": "Harsha Lekamge",
         "url": "https://portfolio.harshalekamge.com/",
         "image": "https://portfolio.harshalekamge.com/logo192.png",
-        "email": "mailto:contact@harshalekamge.com",
-        "jobTitle": "Web Developer, Software Engineering Undergraduate, Data Scientist",
-        "description": "Harsha Lekamge, Official portfolio of Harsha Lekamge, showcasing projects, skills, and experience in web development, software engineering, and data science.",
+        "jobTitle": "Software Engineer & Data Scientist",
+        "description": "Professional portfolio of Harsha Lekamge specializing in web development, software engineering, and data science.",
         "address": {
           "@type": "PostalAddress",
           "addressCountry": "Sri Lanka"
         },
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Freelance / Independent"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "Professional Inquiries",
+          "email": "contact@harshalekamge.com"
+        },
+        "knowsAbout": [
+          "Web Development",
+          "React",
+          "Node.js",
+          "MongoDB",
+          "Data Science",
+          "Software Engineering",
+          "REST APIs",
+          "Cloud Computing",
+          "DevOps"
+        ],
         "sameAs": [
           "https://www.linkedin.com/in/harshalekamge",
           "https://github.com/harshalekamge"
         ]
       }
     </script>
+
+    <!-- Schema: Website -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Harsha Lekamge Portfolio",
+        "url": "https://portfolio.harshalekamge.com/",
+        "publisher": {
+          "@type": "Person",
+          "name": "Harsha Lekamge"
+        }
+      }
+    </script>
   </head>
 
   <body>
-    <!-- SEO fallback content (Google-visible, UI-hidden) -->
-    <section
-      aria-hidden="true"
-      style="
-        position: absolute;
-        left: -9999px;
-        top: auto;
-        width: 1px;
-        height: 1px;
-        overflow: hidden;
-      "
-    >
-      <h1>Harsha Lekamge</h1>
-      <p>
-        Harsha Lekamge, a Web Developer, Software Engineering
-        Undergraduate, and Data Scientist from Sri Lanka, Official portfolio of Harsha Lekamge.
-      </p>
-      <h2>Software Engineer & Data Scientist – Sri Lanka</h2>
 
+    <!-- SEO Header (Readable by Google, Hidden from UI) -->
+    <header style="position:absolute; left:-9999px;">
+      <h1>Harsha Lekamge – Software Engineer & Data Scientist</h1>
       <p>
-        Harsha Lekamge is a Software Engineer and Data Scientist based in Sri Lanka. 
-        Harsha Lekamge specializes in web development, modern software engineering, and information technology solutions.
+        Professional portfolio showcasing projects, technical skills, and
+        experience in software engineering, web development, and data science.
       </p>
+    </header>
 
-      <p>
-        With experience in building scalable web applications and data-driven systems, 
-        Harsha Lekamge focuses on combining software engineering principles with practical data science techniques.
-      </p>
-
-      <p>
-        Harsha Lekamge | Areas of expertise include web development, information technology, software architecture, and data analytics.
-      </p>
-    </section>
-
-    <!-- React root (DO NOT REMOVE) -->
+    <!-- React Root -->
     <div id="root"></div>
 
-    <!-- Noscript fallback -->
+    <!-- NoScript Fallback -->
     <noscript>
       <div
         style="
@@ -151,10 +184,15 @@
           z-index: 9999;
         "
       >
-        <strong>Interactive Content Requires JavaScript</strong><br />
-        The portfolio of Harsha Lekamge is built as a modern web application.
-        Please enable JavaScript to experience the full website.
+        <div>
+          <h2>JavaScript Required</h2>
+          <p>
+            This portfolio uses modern web technologies.
+            Please enable JavaScript to view the full website.
+          </p>
+        </div>
       </div>
     </noscript>
+
   </body>
 </html>
