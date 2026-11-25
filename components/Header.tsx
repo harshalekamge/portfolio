@@ -194,7 +194,11 @@ export default function Header() {
             </a>
           ))}
           <div className="sheet__meta mono">
-            <a href={`mailto:${site.email}`}>{site.email}</a>
+            {site.emails.map((e) => (
+              <a key={e} href={`mailto:${e}`}>
+                {e}
+              </a>
+            ))}
             {socials.slice(0, 3).map((s) => (
               <a key={s.href} href={s.href} target="_blank" rel="noopener noreferrer">
                 {s.label} ↗

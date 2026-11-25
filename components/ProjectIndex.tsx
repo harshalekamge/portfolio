@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { projects, type Project } from "@/content/site";
 
 const groups: { key: Project["group"]; title: string; blurb: string }[] = [
@@ -66,6 +67,17 @@ export default function ProjectIndex() {
                             </a>
                           ))}
                         </p>
+                        {p.image && (
+                          <figure className="prow__shot" style={{ ["--tone" as string]: p.tone ?? "#141210" }}>
+                            <Image
+                              src={p.image}
+                              alt={p.imageAlt ?? `${p.title} screenshot`}
+                              width={p.width ?? 1600}
+                              height={p.height ?? 1000}
+                              sizes="(max-width: 760px) 92vw, 58vw"
+                            />
+                          </figure>
+                        )}
                       </div>
                     </details>
                   </li>

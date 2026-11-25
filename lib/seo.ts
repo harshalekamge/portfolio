@@ -10,7 +10,7 @@ export function jsonLd() {
     familyName: "Lekamge",
     url: `${site.url}/`,
     image: `${site.url}${site.portrait}`,
-    email: `mailto:${site.email}`,
+    email: site.emails.map((e) => `mailto:${e}`),
     telephone: site.phone,
     jobTitle: "Software Engineer & Data Scientist",
     description: site.description,

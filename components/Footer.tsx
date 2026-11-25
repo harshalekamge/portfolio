@@ -17,7 +17,7 @@ function RollWord({ text }: { text: string }) {
   );
 }
 
-function CopyEmail() {
+function CopyEmail({ address }: { address: string }) {
   const [msg, setMsg] = useState("Copy");
   return (
     <button
@@ -25,7 +25,7 @@ function CopyEmail() {
       className="pill"
       onClick={async () => {
         try {
-          await navigator.clipboard.writeText(site.email);
+          await navigator.clipboard.writeText(address);
           setMsg("Copied ✓");
         } catch {
           setMsg("Select & copy");
@@ -264,7 +264,12 @@ export default function Footer({ num = "06" }: { num?: string }) {
 
   const year = new Date().getFullYear();
   const rows = [
-    { k: "Email", v: site.email, href: `mailto:${site.email}`, action: <CopyEmail /> },
+    ...site.emails.map((e, i) => ({
+      k: i === 0 ? "Email" : "Gmail",
+      v: e,
+      href: `mailto:${e}`,
+      action: <CopyEmail address={e} />,
+    })),
     { k: "Phone", v: site.phone, href: site.phoneHref },
     ...socials.map((s) => ({ k: s.label, v: s.handle, href: s.href })),
   ];
@@ -295,7 +300,7 @@ export default function Footer({ num = "06" }: { num?: string }) {
           </p>
           <ul className="footer__rows" data-reveal-rule>
             {rows.map((r) => (
-              <li key={r.k}>
+              <li key={r.href}>
                 <span className="mono">{r.k}</span>
                 <a href={r.href} {...(r.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
                   {r.v}
