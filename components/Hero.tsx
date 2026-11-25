@@ -3,13 +3,11 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { featuredProjects, roles, site } from "@/content/site";
+import { heroShots, roles, site, type HeroShot } from "@/content/site";
 import { setupGsap, isStill, finePointer, afterIntro } from "@/lib/motion";
 import { createSwapper, liftLetters } from "@/lib/swapTitle";
 import Scribble from "./Scribble";
 
-const slotA = [featuredProjects[0], featuredProjects[4], featuredProjects[2]];
-const slotB = [featuredProjects[1], featuredProjects[3], featuredProjects[0]];
 
 function Letters({ word }: { word: string }) {
   return (
@@ -25,18 +23,18 @@ function Letters({ word }: { word: string }) {
   );
 }
 
-function Slot({ items, className, label, sizes }: { items: typeof featuredProjects; className: string; label: string; sizes: string }) {
+function Slot({ items, className, label, sizes }: { items: HeroShot[]; className: string; label: string; sizes: string }) {
   return (
     <a className={`hero__slot ${className}`} href="#work" data-slot aria-label={label} data-cursor>
       {items.map((p, i) => (
-        <span className="hero__ph" key={p.slug} style={{ zIndex: i === 0 ? 2 : 0, ["--tone" as string]: p.tone }}>
+        <span className="hero__ph" key={p.src} style={{ zIndex: i === 0 ? 2 : 0, ["--tone" as string]: p.tone }}>
           <Image
-            src={p.image!}
-            alt=""
+            src={p.src}
+            alt={i === 0 ? p.alt : ""}
             fill
             sizes={sizes}
             priority={i === 0}
-            style={{ objectFit: "cover", objectPosition: "50% 20%" }}
+            style={{ objectFit: "cover", objectPosition: p.pos ?? "50% 30%" }}
           />
         </span>
       ))}
@@ -139,10 +137,10 @@ export default function Hero() {
       <h1 className="hero__title" id="hero-title" aria-label="Harsha Lekamge">
         <span className="hero__line">
           <Letters word="Harsha" />
-          <Slot items={slotA} className="hero__slot--a" label="See selected work" sizes="(max-width: 767px) 40vw, 18vw" />
+          <Slot items={heroShots.a} className="hero__slot--a" label="See selected work" sizes="(max-width: 767px) 40vw, 18vw" />
         </span>
         <span className="hero__line hero__line--indent">
-          <Slot items={slotB} className="hero__slot--b" label="See selected work" sizes="(max-width: 767px) 94vw, 16vw" />
+          <Slot items={heroShots.b} className="hero__slot--b" label="See selected work" sizes="(max-width: 767px) 94vw, 16vw" />
           <span className="hero__last">
             <Letters word="Lekamge." />
             <span className="hero__mark">

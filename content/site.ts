@@ -58,6 +58,25 @@ export const roles: [string, string][] = [
   ["UI / UX", "Designer"],
 ];
 
+/**
+ * Screenshots that cycle inside the two image boxes in the hero (and only there).
+ * pos = which part of the screenshot stays in view when it's cropped.
+ */
+export type HeroShot = { src: string; alt: string; tone: string; pos?: string };
+export const heroShots: { a: HeroShot[]; b: HeroShot[] } = {
+  a: [
+    { src: "/images/hero/1b-labs-hero.webp", alt: "One Billion Labs website hero", tone: "#6d28d9", pos: "50% 60%" },
+    { src: "/images/hero/quintolink-hero.webp", alt: "Quintolink website hero", tone: "#0a0b14", pos: "30% 40%" },
+    { src: "/images/hero/quintolink-stack.webp", alt: "Quintolink tech stack section", tone: "#22e3a0", pos: "50% 60%" },
+    { src: "/images/hero/1b-labs-footer.webp", alt: "One Billion Labs website footer", tone: "#ffffff", pos: "40% 70%" },
+  ],
+  b: [
+    { src: "/images/hero/quintolink-industries.webp", alt: "Quintolink industries section", tone: "#0a0b14", pos: "50% 40%" },
+    { src: "/images/hero/quintolink-about.webp", alt: "Quintolink: Building what's next", tone: "#0a0b14", pos: "20% 30%" },
+    { src: "/images/hero/quintolink-team.webp", alt: "Quintolink contact section", tone: "#ffffff", pos: "50% 40%" },
+  ],
+};
+
 /** Pinned intro statement: words fill in as you scroll. Wrap a phrase in *stars* to mark it. */
 export const statement =
   "I build software people actually use. Web apps, data pipelines and machine-learning models, designed in *Figma* and shipped in *code*. I run *One Billion Labs*, co-founded *Quintolink*, and I care about the details users never notice, until they're missing.";
