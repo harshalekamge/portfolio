@@ -2227,14 +2227,16 @@ html.panel-open {
    Sub-pages (/projects, /skills)
    ========================================================================= */
 .subpage {
-  padding: calc(var(--header) + 6vh) var(--gut) 0;
+  padding: calc(var(--header) + 8vh) var(--gut) 0;
   min-height: 100svh;
 }
 .pintro {
   display: flex;
   flex-direction: column;
-  gap: clamp(20px, 3vh, 32px);
-  padding-bottom: clamp(56px, 10vh, 120px);
+  min-height: calc(100svh - var(--header) - 8vh);
+  padding-bottom: clamp(56px, 9vh, 110px);
+  margin-bottom: clamp(72px, 12vh, 150px);
+  border-bottom: 1px solid var(--line);
 }
 .pintro__home {
   color: var(--ink);
@@ -2244,9 +2246,11 @@ html.panel-open {
   color: var(--accent);
 }
 .pintro__title {
+  margin: auto 0 0;
+  padding: clamp(48px, 9vh, 120px) 0 clamp(40px, 7vh, 96px);
   font-size: clamp(56px, 10.6vw, 220px);
   font-weight: 500;
-  line-height: 0.86;
+  line-height: 0.88;
   letter-spacing: -0.05em;
   text-transform: uppercase;
   color: var(--ink);
@@ -2255,31 +2259,49 @@ html.panel-open {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   column-gap: var(--gut);
+  row-gap: 40px;
   align-items: end;
+  padding-top: clamp(28px, 4vh, 44px);
+  border-top: 1px solid var(--line);
 }
 .pintro__lead {
   grid-column: 1 / span 6;
   font-size: var(--t-lead);
-  line-height: 1.35;
+  line-height: 1.45;
   color: var(--ink);
-  max-width: 46ch;
+  max-width: 44ch;
 }
-.pintro__aside {
+.pintro__side {
   grid-column: 8 / span 5;
-  justify-self: end;
-  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 28px;
 }
 .pintro__stats {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
+  gap: clamp(28px, 4vw, 64px);
+}
+.pintro__stats > div {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 8px;
+}
+.pintro__stats dt {
   color: var(--muted);
 }
-.pintro__stats a {
-  color: var(--ink);
-}
-.pintro__stats a:hover {
+.pintro__stats dd {
+  font-size: clamp(44px, 5vw, 84px);
+  font-weight: 500;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
   color: var(--accent);
+}
+.pintro__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
 }
 .subpage .pindex {
   margin-top: 0;
@@ -2327,6 +2349,7 @@ html.panel-open {
   font-size: 12px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  white-space: nowrap;
   color: var(--paper);
   transition:
     background-color 0.3s var(--ease),
@@ -2877,15 +2900,20 @@ body[data-menu="open"] ~ .dock {
   .pindex__head {
     align-items: flex-start;
   }
+  .pintro {
+    min-height: auto;
+  }
   .pintro__foot {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 24px;
+    gap: 32px;
   }
-  .pintro__aside {
-    justify-self: auto;
-    text-align: left;
+  .pintro__side {
+    align-items: flex-start;
+  }
+  .pintro__links {
+    justify-content: flex-start;
   }
   .dock {
     left: 50%;

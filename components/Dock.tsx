@@ -21,7 +21,8 @@ export default function Dock() {
     let raf = 0;
     const update = () => {
       raf = 0;
-      const past = home ? scrollY > innerHeight * 0.8 : true;
+      // home: after the hero. Sub-pages: once you scroll past the intro, so it never covers its links
+      const past = home ? scrollY > innerHeight * 0.8 : scrollY > innerHeight * 0.6;
       setShow(past && !footerSeen.current);
     };
     const queue = () => raf || (raf = requestAnimationFrame(update));

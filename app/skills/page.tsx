@@ -27,13 +27,11 @@ export default function SkillsPage() {
           label="Toolkit"
           title="Skills & technologies"
           lead="Hover any skill to see up to three projects where I've used it. Click it to see every one. Lighter names are tools I use but don't have a public project for yet."
-          aside={
-            <p className="mono pintro__stats">
-              <span>{count} skills &amp; tools</span>
-              <span>{skills.length} groups</span>
-              <a href="/projects">All projects →</a>
-            </p>
-          }
+          stats={[
+            { n: count, label: "Skills & tools" },
+            { n: skills.length, label: "Groups" },
+          ]}
+          links={[{ href: "/projects", label: "All projects" }]}
         />
         <Skills standalone />
       </main>

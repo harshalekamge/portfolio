@@ -27,14 +27,14 @@ export default function ProjectsPage() {
           label="Projects"
           title="More projects"
           lead="The work where most of the effort lives in the code: back-ends, data models, research and projects built with classmates and friends. Open any row for the full story and the stack."
-          aside={
-            <p className="mono pintro__stats">
-              <span>{String(more.filter((p) => p.group === "engineering").length).padStart(2, "0")} engineering &amp; research</span>
-              <span>{String(more.filter((p) => p.group === "collab").length).padStart(2, "0")} collaborations</span>
-              <a href="/#work">See the featured work on the home page →</a>
-              <a href="/skills">Browse by skill →</a>
-            </p>
-          }
+          stats={[
+            { n: more.filter((p) => p.group === "engineering").length, label: "Engineering & research" },
+            { n: more.filter((p) => p.group === "collab").length, label: "Collaborations" },
+          ]}
+          links={[
+            { href: "/#work", label: "Featured work" },
+            { href: "/skills", label: "Browse by skill" },
+          ]}
         />
         <ProjectIndex />
       </main>
