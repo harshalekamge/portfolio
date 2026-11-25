@@ -6,6 +6,7 @@ import { createPortal } from "react-dom";
 import { skills, type Project } from "@/content/site";
 import { projectsFor, initials } from "@/lib/skillMap";
 import { finePointer } from "@/lib/motion";
+import { scrollToId, projectHref } from "@/lib/scrollTo";
 
 function Thumb({ p, big = false }: { p: Project; big?: boolean }) {
   return (
@@ -21,36 +22,21 @@ function Thumb({ p, big = false }: { p: Project; big?: boolean }) {
 
 type Pop = { skill: string; x: number; y: number; flip: boolean };
 
-/** Scroll to a project. Work cards are sticky, so measure where they sit in the flow, not where they're stuck. */
-function goTo(slug: string) {
-  const el = document.getElementById(`project-${slug}`);
-  if (!el) return;
-  const lenis = window.__lenis;
-  if (el.classList.contains("card")) {
-    const prev = el.style.position;
-    el.style.position = "relative";
-    const y = el.getBoundingClientRect().top + scrollY;
-    el.style.position = prev;
-    if (lenis) lenis.scrollTo(y, { duration: 1.4 });
-    else window.scrollTo({ top: y });
-    return;
-  }
-  el.querySelector("details")?.setAttribute("open", "");
-  if (lenis) lenis.scrollTo(el, { offset: -90, duration: 1.4 });
-  else window.scrollTo({ top: el.getBoundingClientRect().top + scrollY - 90 });
-}
-const jump = (e: React.MouseEvent, slug: string, before: () => void) => {
+/** Same page: glide there. Other page: let the link navigate (the hash is handled on arrival). */
+const jump = (e: React.MouseEvent<HTMLAnchorElement>, before: () => void) => {
+  const a = e.currentTarget;
+  before();
+  if (a.pathname !== location.pathname) return;
   e.preventDefault();
   e.stopPropagation();
-  before();
-  setTimeout(() => goTo(slug), 60);
+  setTimeout(() => scrollToId(a.hash.slice(1)), 60);
 };
 
 /**
  * Skills & technologies. Hover a skill to see up to three projects that use it;
  * click it (or "See all") to open a panel with every project that does.
  */
-export default function Skills() {
+export default function Skills({ standalone = false }: { standalone?: boolean }) {
   const [pop, setPop] = useState<Pop | null>(null);
   const [open, setOpen] = useState<string | null>(null);
   const hideT = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
@@ -114,16 +100,18 @@ export default function Skills() {
   const panelList = open ? projectsFor(open) : [];
 
   return (
-    <section className="skills" id="skills" aria-labelledby="skills-title">
-      <div className="section-head">
-        <p className="label mono">
-          <span>(06)</span> Toolkit
-        </p>
-        <h2 className="section-title" id="skills-title" data-reveal-lines>
-          Skills &amp; technologies
-        </h2>
-        <p className="skills__hint mono">Hover a skill to see where I&apos;ve used it. Click for every project.</p>
-      </div>
+    <section className={`skills${standalone ? " skills--page" : ""}`} id="skills" aria-label="Skills and technologies">
+      {!standalone && (
+        <div className="section-head">
+          <p className="label mono">
+            <span>(06)</span> Toolkit
+          </p>
+          <h2 className="section-title" id="skills-title" data-reveal-lines>
+            Skills &amp; technologies
+          </h2>
+          <p className="skills__hint mono">Hover a skill to see where I&apos;ve used it. Click for every project.</p>
+        </div>
+      )}
       <div className="skills__grid" data-reveal-rule>
         {skills.map((g) => (
           <div key={g.group} className="skills__group">
@@ -173,7 +161,7 @@ export default function Skills() {
               <ul className="sk-pop__list">
                 {popList.slice(0, 3).map((p) => (
                   <li key={p.slug}>
-                    <a href={`#project-${p.slug}`} onClick={(e) => jump(e, p.slug, () => setPop(null))}>
+                    <a href={projectHref(p)} onClick={(e) => jump(e, () => setPop(null))}>
                       <Thumb p={p} />
                       <span>
                         <b>{p.title}</b>
@@ -241,9 +229,9 @@ export default function Skills() {
                     ))}
                   </p>
                   <p className="sk-card__links">
-                    <a className="pill" href={`#project-${p.slug}`} onClick={(e) => jump(e, p.slug, () => setOpen(null))}>
-                      <span className="roll" data-text="Jump to project ↓">
-                        <span>Jump to project ↓</span>
+                    <a className="pill" href={projectHref(p)} onClick={(e) => jump(e, () => setOpen(null))}>
+                      <span className="roll" data-text="Go to project →">
+                        <span>Go to project →</span>
                       </span>
                     </a>
                     {p.links.map((l) => (

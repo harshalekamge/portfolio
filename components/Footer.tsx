@@ -217,7 +217,7 @@ function usePhysics(area: React.RefObject<HTMLDivElement | null>, canvas: React.
   }, [area, canvas]);
 }
 
-export default function Footer() {
+export default function Footer({ num = "06" }: { num?: string }) {
   const area = useRef<HTMLDivElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
   const big = useRef<HTMLAnchorElement>(null);
@@ -274,7 +274,7 @@ export default function Footer() {
       <div className="footer__stage" ref={area}>
         <canvas className="footer__canvas" ref={canvas} aria-hidden="true" />
         <p className="label mono footer__label">
-          <span>(07)</span> Contact
+          <span>({num})</span> Contact
         </p>
         <h2 className="footer__title" id="contact-title">
           <a href={`mailto:${site.email}`} ref={big} aria-label="Let's connect: email Harsha">

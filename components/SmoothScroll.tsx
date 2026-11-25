@@ -5,6 +5,7 @@ import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { setupGsap, isStill } from "@/lib/motion";
+import { scrollToId } from "@/lib/scrollTo";
 
 declare global {
   interface Window {
@@ -43,20 +44,34 @@ export default function SmoothScroll() {
     document.addEventListener("hl:motion", onMotion);
     document.addEventListener("hl:intro-done", onIntro);
 
-    // in-page links glide instead of jumping
+    // in-page links glide instead of jumping ("#x", or "/#x" while already on the home page)
     const onClick = (e: MouseEvent) => {
-      const a = (e.target as Element | null)?.closest?.("a[href^='#']") as HTMLAnchorElement | null;
-      if (!a) return;
-      const id = a.getAttribute("href")!;
-      const target = id === "#top" || id === "#" ? 0 : document.querySelector(id);
-      if (target === null) return;
+      if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+      const a = (e.target as Element | null)?.closest?.("a[href]") as HTMLAnchorElement | null;
+      if (!a || a.target === "_blank") return;
+      const href = a.getAttribute("href")!;
+      let hash = "";
+      if (href.startsWith("#")) hash = href;
+      else if (a.origin === location.origin && a.pathname === location.pathname && a.hash) hash = a.hash;
+      if (!hash) return;
       e.preventDefault();
-      if (lenis) lenis.scrollTo(target as HTMLElement | number, { duration: 1.2 });
-      else if (target === 0) window.scrollTo({ top: 0 });
-      else (target as HTMLElement).scrollIntoView();
-      if (id !== "#top" && id !== "#") history.replaceState(null, "", id);
+      if (hash === "#top" || hash === "#") {
+        if (lenis) lenis.scrollTo(0, { duration: 1.2 });
+        else window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
+      if (scrollToId(hash.slice(1))) history.replaceState(null, "", hash);
     };
     document.addEventListener("click", onClick);
+
+    // arriving with a #hash (e.g. /projects#project-kola-vision): go there once the page has settled
+    if (location.hash.length > 1) {
+      const id = decodeURIComponent(location.hash.slice(1));
+      const go = () => scrollToId(id, { immediate: true });
+      const intro = document.documentElement.hasAttribute("data-loading");
+      if (intro) document.addEventListener("hl:intro-done", () => setTimeout(go, 50), { once: true });
+      else (document.fonts?.ready ?? Promise.resolve()).then(() => setTimeout(go, 120));
+    }
 
     const refresh = () => ScrollTrigger.refresh();
     document.fonts?.ready.then(refresh);

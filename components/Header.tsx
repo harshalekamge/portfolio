@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { gsap } from "gsap";
+import { usePathname } from "next/navigation";
 import { nav, site, socials } from "@/content/site";
 import { setupGsap, isStill } from "@/lib/motion";
 
@@ -52,34 +53,36 @@ function MotionSwitch() {
 }
 
 export default function Header() {
+  const path = usePathname();
   const bar = useRef<HTMLElement>(null);
   const sheet = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
   const tl = useRef<gsap.core.Timeline | null>(null);
 
-  // hide while reading down, come back on the way up (and at the very top)
+  // hide while reading down, come back on the way up (and at the very top).
+  // It only flips after a run of ~48px in one direction, so small wobbles at the end
+  // of a trackpad fling don't make it flicker.
   useEffect(() => {
     const el = bar.current!;
     let last = scrollY;
+    let run = 0;
     let hidden = false;
     const set = (h: boolean) => {
       if (h === hidden) return;
       hidden = h;
       el.classList.toggle("is-hidden", h);
-      // sticky things (the work stack) slide up into the space the header leaves
-      document.documentElement.style.setProperty("--header-shown", h ? "0" : "1");
     };
     const onScroll = () => {
       const y = scrollY;
       const d = y - last;
-      if (y < el.offsetHeight * 1.5) {
-        last = y;
+      last = y;
+      if (y < el.offsetHeight * 1.5 || document.body.dataset.menu === "open") {
+        run = 0;
         return set(false);
       }
-      if (Math.abs(d) < 4) return;
-      last = y;
-      if (document.body.dataset.menu === "open") return set(false);
-      set(d > 0);
+      run = Math.sign(d) === Math.sign(run) ? run + d : d;
+      if (run > 48) set(true);
+      else if (run < -48) set(false);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     el.addEventListener("focusin", () => set(false));
@@ -144,7 +147,7 @@ export default function Header() {
           <ul>
             {nav.map((n) => (
               <li key={n.href}>
-                <a href={n.href}>
+                <a href={n.href} aria-current={n.href === path ? "page" : undefined}>
                   <RollText>{n.label}</RollText>
                 </a>
               </li>
@@ -177,7 +180,13 @@ export default function Header() {
         </div>
         <nav className="sheet__in" aria-label="Menu">
           {nav.map((n, i) => (
-            <a key={n.href} className="sheet__link" href={n.href} onClick={() => setOpen(false)}>
+            <a
+              key={n.href}
+              className="sheet__link"
+              href={n.href}
+              aria-current={n.href === path ? "page" : undefined}
+              onClick={() => setOpen(false)}
+            >
               <span>
                 <small className="mono">0{i + 1}</small>
                 {n.label}

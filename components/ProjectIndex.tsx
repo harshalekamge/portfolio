@@ -15,8 +15,7 @@ const groups: { key: Project["group"]; title: string; blurb: string }[] = [
 
 /** The rest of the work, as an index: one row per project, open a row for the full story. */
 export default function ProjectIndex() {
-  // numbering carries on from the featured cards above
-  const numbered = new Map(projects.map((p, i) => [p.slug, i + 1]));
+  const numbered = new Map(projects.filter((p) => p.group !== "featured").map((p, i) => [p.slug, i + 1]));
   return (
     <div className="pindex">
       {groups.map((g) => {
@@ -24,9 +23,9 @@ export default function ProjectIndex() {
         return (
           <section key={g.key} className="pindex__group" aria-labelledby={`pindex-${g.key}`}>
             <header className="pindex__head">
-              <h3 id={`pindex-${g.key}`} className="pindex__title">
+              <h2 id={`pindex-${g.key}`} className="pindex__title">
                 {g.title}
-              </h3>
+              </h2>
               <p className="pindex__blurb">{g.blurb}</p>
             </header>
             <ol className="pindex__list" data-reveal-rule>

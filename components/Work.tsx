@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { featuredProjects as projects } from "@/content/site";
-import ProjectIndex from "./ProjectIndex";
+import MoreWork from "./MoreWork";
 import { setupGsap, isStill, finePointer, Spring } from "@/lib/motion";
 
 type P = (typeof projects)[number];
@@ -208,7 +208,7 @@ export default function Work() {
           A few things I&apos;ve built
         </h2>
         <p className="work__count mono" aria-hidden="true">
-          {String(projects.length).padStart(2, "0")} featured · more below
+          {String(projects.length).padStart(2, "0")} featured projects
         </p>
       </div>
 
@@ -243,7 +243,7 @@ export default function Work() {
           </li>
         ))}
       </ol>
-      <ProjectIndex />
+      <MoreWork />
       <div className="hover-tag" ref={tag} aria-hidden="true">
         <span>View</span>
       </div>

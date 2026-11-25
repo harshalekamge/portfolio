@@ -10,5 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
       images: [`${site.url}${site.portrait}`],
     },
+    { url: `${site.url}/projects`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${site.url}/skills`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
   ];
 }
