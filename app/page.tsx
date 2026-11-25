@@ -4,6 +4,7 @@ import Statement from "@/components/Statement";
 import Process from "@/components/Process";
 import Work from "@/components/Work";
 import Band from "@/components/Band";
+import InkPool from "@/components/InkPool";
 import About from "@/components/About";
 import { Experience, Skills } from "@/components/Experience";
 import Footer from "@/components/Footer";
@@ -18,6 +19,7 @@ export default function Home() {
         <Statement />
         <Process />
         <Work />
+        <InkPool />
         <Band />
         <About />
         <Experience />

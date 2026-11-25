@@ -66,6 +66,8 @@ export default function Header() {
       if (h === hidden) return;
       hidden = h;
       el.classList.toggle("is-hidden", h);
+      // sticky things (the work stack) slide up into the space the header leaves
+      document.documentElement.style.setProperty("--header-shown", h ? "0" : "1");
     };
     const onScroll = () => {
       const y = scrollY;

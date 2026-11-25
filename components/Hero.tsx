@@ -5,10 +5,11 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { projects, roles, site } from "@/content/site";
 import { setupGsap, isStill, finePointer, afterIntro } from "@/lib/motion";
+import { createSwapper, liftLetters } from "@/lib/swapTitle";
 import Scribble from "./Scribble";
 
-const slotA = [projects[0], projects[2], projects[1]];
-const slotB = [projects[1], projects[0], projects[2]];
+const slotA = [projects[0], projects[4], projects[2]];
+const slotB = [projects[1], projects[3], projects[0]];
 
 function Letters({ word }: { word: string }) {
   return (
@@ -43,28 +44,7 @@ function Slot({ items, className, label, sizes }: { items: typeof projects; clas
   );
 }
 
-/* ---------- the role under the name: four different ways to change it ---------- */
-const GLYPHS = "<>/{}[]=+*#_01;:";
 const HOLD = [4200, 2600, 3200, 2600];
-const rand = (a: number, b: number) => a + Math.random() * (b - a);
-
-function layer(w: [string, string], cls = "") {
-  const s = document.createElement("span");
-  s.className = "role__layer" + (cls ? " " + cls : "");
-  w.forEach((word) => {
-    const ln = document.createElement("span");
-    ln.className = "role__ln";
-    for (const c of word) {
-      const l = document.createElement("span");
-      l.className = "role__ch";
-      l.textContent = c === " " ? " " : c;
-      ln.appendChild(l);
-    }
-    s.appendChild(ln);
-  });
-  return s;
-}
-const letters = (el: Element) => Array.from(el.querySelectorAll<HTMLElement>(".role__ch"));
 
 export default function Hero() {
   const root = useRef<HTMLElement>(null);
@@ -144,178 +124,13 @@ export default function Hero() {
 
   // role rotator (roll, bleed, split, decode) + letters that float away from the cursor
   useEffect(() => {
-    const el = role.current!;
-    const hero = root.current!;
-    let wi = 0;
-    let fx = 0;
-    let timer: ReturnType<typeof setTimeout> | undefined;
-    let alive = true;
-    const clean = (w: [string, string]) => {
-      el.innerHTML = "";
-      el.appendChild(layer(w));
-    };
-    const motionOK = () => !isStill() && !!Element.prototype.animate;
-
-    function roll(from: Element, to: [string, string], done: () => void) {
-      from.classList.add("clip");
-      letters(from).forEach((l, i) =>
-        l.animate([{ transform: "none" }, { transform: "translateY(-110%)" }], { duration: 620, delay: i * 30, easing: "cubic-bezier(.65,0,.25,1)", fill: "forwards" }),
-      );
-      const nl = layer(to, "clip");
-      el.appendChild(nl);
-      const L = letters(nl);
-      L.forEach((l, i) =>
-        l.animate([{ transform: "translateY(110%)" }, { transform: "none" }], { duration: 700, delay: 160 + i * 30, easing: "cubic-bezier(.65,0,.25,1)", fill: "backwards" }),
-      );
-      timer = setTimeout(() => (clean(to), done()), 160 + L.length * 30 + 760);
-    }
-    function bleed(from: Element, to: [string, string], done: () => void) {
-      letters(from).forEach((l) =>
-        l.animate(
-          [
-            { filter: "blur(0px)", opacity: 1, transform: "none" },
-            { filter: "blur(20px)", opacity: 0, transform: `translateY(${rand(-30, 30)}px) scale(1.4)` },
-          ],
-          { duration: 800, delay: rand(0, 300), easing: "cubic-bezier(.4,0,.2,1)", fill: "forwards" },
-        ),
-      );
-      const nl = layer(to);
-      el.appendChild(nl);
-      letters(nl).forEach((l) =>
-        l.animate(
-          [
-            { filter: "blur(20px)", opacity: 0, transform: "scale(1.4)" },
-            { filter: "blur(0px)", opacity: 1, transform: "none" },
-          ],
-          { duration: 1000, delay: 560 + rand(0, 360), easing: "cubic-bezier(.2,.7,.2,1)", fill: "backwards" },
-        ),
-      );
-      timer = setTimeout(() => (clean(to), done()), 2000);
-    }
-    function split(from: Element, to: [string, string], done: () => void) {
-      from.querySelectorAll(".role__ln").forEach((ln, k) =>
-        ln.animate(
-          [
-            { transform: "none", letterSpacing: "-.02em", opacity: 1 },
-            { transform: `translateX(${k ? 60 : -60}vw)`, letterSpacing: ".3em", opacity: 0 },
-          ],
-          { duration: 900, easing: "cubic-bezier(.7,0,.2,1)", fill: "forwards" },
-        ),
-      );
-      const nl = layer(to);
-      el.appendChild(nl);
-      nl.querySelectorAll(".role__ln").forEach((ln, k) =>
-        ln.animate(
-          [
-            { transform: `translateX(${k ? -60 : 60}vw)`, letterSpacing: ".3em", opacity: 0 },
-            { transform: "none", letterSpacing: "-.02em", opacity: 1 },
-          ],
-          { duration: 1100, delay: 380, easing: "cubic-bezier(.2,.8,.2,1)", fill: "backwards" },
-        ),
-      );
-      timer = setTimeout(() => (clean(to), done()), 1550);
-    }
-    function decode(_from: Element, to: [string, string], done: () => void) {
-      const nl = layer(to);
-      el.innerHTML = "";
-      el.appendChild(nl);
-      const L = letters(nl);
-      const word = to.join("").replace(/ /g, " ");
-      const plan = L.map((_, i) => 260 + i * 48 + rand(0, 200));
-      const end = Math.max(...plan);
-      const t0 = performance.now();
-      const tick = () => {
-        if (!alive) return;
-        const t = performance.now() - t0;
-        L.forEach((l, i) => {
-          l.textContent = t < plan[i] ? GLYPHS[(Math.random() * GLYPHS.length) | 0] : word[i];
-          l.style.opacity = t < plan[i] ? "0.5" : "1";
-        });
-        if (t < end + 30) timer = setTimeout(tick, 45);
-        else (clean(to), done());
-      };
-      tick();
-    }
-    const EFFECTS = [roll, bleed, split, decode];
-
-    const schedule = (ms: number) => {
-      clearTimeout(timer);
-      timer = setTimeout(next, ms);
-    };
-    function next() {
-      if (!alive) return;
-      const from = el.querySelector(".role__layer")!;
-      wi = (wi + 1) % roles.length;
-      const to = roles[wi];
-      if (!motionOK()) {
-        clean(to);
-        return schedule(HOLD[wi % HOLD.length] + 800);
-      }
-      const fn = EFFECTS[fx];
-      fx = (fx + 1) % EFFECTS.length;
-      fn(from, to, () => schedule(HOLD[wi % HOLD.length]));
-    }
-
-    clean(roles[0]);
-    const startRoles = () => {
-      if (motionOK()) {
-        letters(el).forEach((l, i) =>
-          l.animate(
-            [
-              { opacity: 0, transform: "translateY(40%)", filter: "blur(14px)" },
-              { opacity: 1, transform: "none", filter: "blur(0px)" },
-            ],
-            { duration: 1200, delay: 450 + i * 45, easing: "cubic-bezier(.2,.7,.2,1)", fill: "backwards" },
-          ),
-        );
-        schedule(HOLD[0] + 1400);
-      } else schedule(HOLD[0]);
-    };
-    const stop = afterIntro(startRoles);
-    const onVis = () => (document.hidden ? clearTimeout(timer) : schedule(HOLD[wi % HOLD.length]));
-    document.addEventListener("visibilitychange", onVis);
-
-    // the big letters lean away from the cursor, as if floating on water
-    let mx = -1e4;
-    let my = -1e4;
-    let raf = 0;
-    const chars = () => Array.from(hero.querySelectorAll<HTMLElement>(".hero__ch, .role__ch"));
-    const lift = () => {
-      raf = 0;
-      const still = isStill();
-      chars().forEach((l) => {
-        if (still) return (l.style.translate = "");
-        const b = l.getBoundingClientRect();
-        const fs = b.height || 1;
-        const dx = b.left + b.width / 2 - mx;
-        const dy = b.top + b.height / 2 - my;
-        const d = Math.hypot(dx, dy);
-        const k = Math.exp((-d * d) / (fs * fs * 1.2));
-        l.style.translate = `${((dx / (d + 1)) * k * fs * 0.07).toFixed(1)}px ${(-k * fs * 0.11).toFixed(1)}px`;
-      });
-    };
-    const onMove = (e: PointerEvent) => {
-      mx = e.clientX;
-      my = e.clientY;
-      if (!raf) raf = requestAnimationFrame(lift);
-    };
-    const onLeave = () => {
-      mx = my = -1e4;
-      if (!raf) raf = requestAnimationFrame(lift);
-    };
-    if (finePointer()) {
-      hero.addEventListener("pointermove", onMove);
-      hero.addEventListener("pointerleave", onLeave);
-    }
-
+    const swap = createSwapper(role.current!, roles, HOLD, { introDelay: 450 });
+    const stop = afterIntro(() => swap.start());
+    const unlift = finePointer() ? liftLetters(root.current!, ".hero__ch, .role__ch", 0.9) : () => {};
     return () => {
-      alive = false;
       stop();
-      clearTimeout(timer);
-      cancelAnimationFrame(raf);
-      document.removeEventListener("visibilitychange", onVis);
-      hero.removeEventListener("pointermove", onMove);
-      hero.removeEventListener("pointerleave", onLeave);
+      swap.destroy();
+      unlift();
     };
   }, []);
 

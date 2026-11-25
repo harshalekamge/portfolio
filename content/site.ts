@@ -81,6 +81,38 @@ export type Project = {
 /** Projects from the live portfolio. */
 export const projects: Project[] = [
   {
+    slug: "one-billion-labs",
+    title: "One Billion Labs",
+    kind: "Website · My studio",
+    year: "2026",
+    line: "My own studio's front door: fast, bright and built to win clients.",
+    description:
+      "The website for One Billion Labs, the software studio I founded in Colombo. Built with Astro and Lenis smooth scrolling, with a glowing gradient hero, a step-by-step process story and SEO tuned for search in Sri Lanka.",
+    image: "/images/work/one-billion-labs.webp",
+    imageAlt: "One Billion Labs website hero: a purple, cyan and pink gradient behind the words One Billion Labs",
+    width: 1600,
+    height: 1000,
+    tone: "#3b1d8f",
+    tags: ["Astro", "TypeScript", "Lenis", "SEO", "Vercel"],
+    links: [{ label: "Live site", href: "https://www.onebillionlabs.com/" }],
+  },
+  {
+    slug: "quintolink",
+    title: "Quintolink",
+    kind: "Website · Startup",
+    year: "2026",
+    line: "A studio that prints itself in halftone.",
+    description:
+      "The website for Quintolink, the startup I co-founded for web development, UI/UX, custom software and apps. Hand-built in HTML, CSS and JavaScript with an animated halftone canvas, Lenis scrolling and local SEO for Sri Lanka.",
+    image: "/images/work/quintolink.webp",
+    imageAlt: "Quintolink website hero with the word Quinto, a halftone gear graphic and green and black panels",
+    width: 1600,
+    height: 1000,
+    tone: "#0a0b14",
+    tags: ["HTML / CSS / JS", "Canvas", "Lenis", "SEO", "Vercel"],
+    links: [{ label: "Live site", href: "https://quintolink.com/" }],
+  },
+  {
     slug: "saloon-velora",
     title: "Saloon Velora",
     kind: "Website · AI",
@@ -174,6 +206,17 @@ export const experience: Experience[] = [
     summary:
       "Built and maintained internal web systems for the ICT Division, including a centralized comment management system for eROC, a file tracking system and an IT inventory system.",
   },
+];
+
+/**
+ * The ink pool in the middle of the page: two words, one per line, that keep changing.
+ * The first pair comes back between the others and stays up longest.
+ */
+export const inkWords: [string, string][] = [
+  ["Ideas", "to launch"],
+  ["Code", "& craft"],
+  ["Ideas", "to launch"],
+  ["Data", "& design"],
 ];
 
 /** The band that drifts across the page. */
