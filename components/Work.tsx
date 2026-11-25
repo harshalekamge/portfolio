@@ -3,8 +3,76 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { projects } from "@/content/site";
+import { featuredProjects as projects } from "@/content/site";
+import ProjectIndex from "./ProjectIndex";
 import { setupGsap, isStill, finePointer, Spring } from "@/lib/motion";
+
+type P = (typeof projects)[number];
+
+function Shot({ p }: { p: P }) {
+  const phone = p.frame === "phone";
+  return (
+    <span className="card__shot">
+      <span className={`card__float${phone ? " card__float--phone" : ""}`}>
+        {!phone && (
+          <span className="card__browser" aria-hidden="true">
+            <i />
+            <i />
+            <i />
+          </span>
+        )}
+        <Image
+          src={p.image!}
+          alt={p.imageAlt ?? p.title}
+          width={p.width}
+          height={p.height}
+          sizes={phone ? "(max-width: 767px) 60vw, 24vw" : "(max-width: 767px) 88vw, 66vw"}
+          className="card__img"
+        />
+      </span>
+    </span>
+  );
+}
+
+function CardMedia({ p }: { p: P }) {
+  const extras = (
+    <>
+      <span className="card__kind mono">
+        {p.kind} · {p.year}
+      </span>
+      <span className="card__tags" aria-hidden="true">
+        {p.tech.slice(0, 6).map((t) => (
+          <i key={t} className="mono">
+            {t}
+          </i>
+        ))}
+      </span>
+    </>
+  );
+  const style = { ["--tone" as string]: p.tone };
+  if (!p.links.length)
+    return (
+      <div className="card__media" style={style}>
+        <Shot p={p} />
+        {extras}
+      </div>
+    );
+  const l = p.links[0];
+  return (
+    <a
+      className="card__media"
+      href={l.href}
+      target="_blank"
+      rel="noopener"
+      data-hover={`[ Visit ${l.label.toLowerCase()} ↗ ]`}
+      style={style}
+      aria-label={`${p.title}: open ${l.label.toLowerCase()} (new tab)`}
+    >
+      <Shot p={p} />
+      {extras}
+    </a>
+  );
+}
 
 /**
  * Selected work as a stack: every card is a full screen tall and sticks under the header,
@@ -140,13 +208,13 @@ export default function Work() {
           A few things I&apos;ve built
         </h2>
         <p className="work__count mono" aria-hidden="true">
-          {String(projects.length).padStart(2, "0")} projects
+          {String(projects.length).padStart(2, "0")} featured · more below
         </p>
       </div>
 
       <ol className="work__stack">
         {projects.map((p, i) => (
-          <li key={p.slug} className="card" data-card style={{ zIndex: i + 1 }}>
+          <li key={p.slug} id={`project-${p.slug}`} className="card" data-card style={{ zIndex: i + 1 }}>
             <article className="card__in" aria-labelledby={`p-${p.slug}`}>
               <header className="card__band">
                 <h3 className="card__title" id={`p-${p.slug}`}>
@@ -155,47 +223,12 @@ export default function Work() {
                 </h3>
                 <p className="card__line">{p.line}</p>
               </header>
-              <a
-                className="card__media"
-                href={p.links[0].href}
-                target="_blank"
-                rel="noopener"
-                data-hover={`[ Visit ${p.links[0].label.toLowerCase()} ↗ ]`}
-                style={{ ["--tone" as string]: p.tone }}
-                aria-label={`${p.title}: open ${p.links[0].label.toLowerCase()} (new tab)`}
-              >
-                <span className="card__shot">
-                  <span className="card__float">
-                    <span className="card__browser" aria-hidden="true">
-                      <i />
-                      <i />
-                      <i />
-                    </span>
-                    <Image
-                      src={p.image}
-                      alt={p.imageAlt}
-                      width={p.width}
-                      height={p.height}
-                      sizes="(max-width: 767px) 88vw, 66vw"
-                      className="card__img"
-                    />
-                  </span>
-                </span>
-                <span className="card__kind mono">
-                  {p.kind} · {p.year}
-                </span>
-                <span className="card__tags" aria-hidden="true">
-                  {p.tags.map((t) => (
-                    <i key={t} className="mono">
-                      {t}
-                    </i>
-                  ))}
-                </span>
-              </a>
+              <CardMedia p={p} />
               <div className="card__meta">
                 <p className="card__desc">{p.description}</p>
-                <p className="sr-only">Built with {p.tags.join(", ")}.</p>
+                <p className="sr-only">Built with {p.tech.join(", ")}.</p>
                 <p className="card__links">
+                  {!p.links.length && p.note && <span className="mono card__note">{p.note}</span>}
                   {p.links.map((l) => (
                     <a key={l.href} href={l.href} target="_blank" rel="noopener" className="pill">
                       <span className="roll" data-text={`${l.label} ↗`}>
@@ -210,6 +243,7 @@ export default function Work() {
           </li>
         ))}
       </ol>
+      <ProjectIndex />
       <div className="hover-tag" ref={tag} aria-hidden="true">
         <span>View</span>
       </div>

@@ -3,13 +3,13 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { projects, roles, site } from "@/content/site";
+import { featuredProjects, roles, site } from "@/content/site";
 import { setupGsap, isStill, finePointer, afterIntro } from "@/lib/motion";
 import { createSwapper, liftLetters } from "@/lib/swapTitle";
 import Scribble from "./Scribble";
 
-const slotA = [projects[0], projects[4], projects[2]];
-const slotB = [projects[1], projects[3], projects[0]];
+const slotA = [featuredProjects[0], featuredProjects[4], featuredProjects[2]];
+const slotB = [featuredProjects[1], featuredProjects[3], featuredProjects[0]];
 
 function Letters({ word }: { word: string }) {
   return (
@@ -25,13 +25,13 @@ function Letters({ word }: { word: string }) {
   );
 }
 
-function Slot({ items, className, label, sizes }: { items: typeof projects; className: string; label: string; sizes: string }) {
+function Slot({ items, className, label, sizes }: { items: typeof featuredProjects; className: string; label: string; sizes: string }) {
   return (
     <a className={`hero__slot ${className}`} href="#work" data-slot aria-label={label} data-cursor>
       {items.map((p, i) => (
         <span className="hero__ph" key={p.slug} style={{ zIndex: i === 0 ? 2 : 0, ["--tone" as string]: p.tone }}>
           <Image
-            src={p.image}
+            src={p.image!}
             alt=""
             fill
             sizes={sizes}

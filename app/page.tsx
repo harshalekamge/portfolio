@@ -6,7 +6,8 @@ import Work from "@/components/Work";
 import Band from "@/components/Band";
 import InkPool from "@/components/InkPool";
 import About from "@/components/About";
-import { Experience, Skills } from "@/components/Experience";
+import { Experience } from "@/components/Experience";
+import Skills from "@/components/Skills";
 import Footer from "@/components/Footer";
 import Reveals from "@/components/Reveals";
 

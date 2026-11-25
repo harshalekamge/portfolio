@@ -62,108 +62,282 @@ export const roles: [string, string][] = [
 export const statement =
   "I build software people actually use. Web apps, data pipelines and machine-learning models, designed in *Figma* and shipped in *code*. I run *One Billion Labs*, co-founded *Quintolink*, and I care about the details users never notice, until they're missing.";
 
+export type ProjectLink = { label: string; href: string };
+
 export type Project = {
   slug: string;
   title: string;
+  /** featured: big stacked card with a screenshot. engineering / collab: rows in the index below. */
+  group: "featured" | "engineering" | "collab";
   kind: string;
   year: string;
   line: string;
   description: string;
-  image: string;
-  imageAlt: string;
-  width: number;
-  height: number;
-  tone: string;
-  tags: string[];
-  links: { label: string; href: string }[];
+  /** Canonical skill names, exactly as they appear in `skills` below. Drives the skill hovers. */
+  tech: string[];
+  links: ProjectLink[];
+  /** e.g. "Team project", "My part: …", "Internal tool" */
+  note?: string;
+  image?: string;
+  imageAlt?: string;
+  width?: number;
+  height?: number;
+  tone?: string;
+  frame?: "browser" | "phone";
 };
 
-/** Projects from the live portfolio. */
+const gh = (repo: string, label = "GitHub") => ({ label, href: `https://github.com/${repo}` });
+
 export const projects: Project[] = [
+  /* ---------- UI / UX: big cards with screenshots ---------- */
   {
     slug: "one-billion-labs",
     title: "One Billion Labs",
+    group: "featured",
     kind: "Website · My studio",
     year: "2026",
     line: "My own studio's front door: fast, bright and built to win clients.",
     description:
       "The website for One Billion Labs, the software studio I founded in Colombo. Built with Astro and Lenis smooth scrolling, with a glowing gradient hero, a step-by-step process story and SEO tuned for search in Sri Lanka.",
+    tech: ["Astro", "TypeScript", "HTML / CSS", "Lenis", "On-page SEO", "Vercel"],
+    links: [{ label: "Live site", href: "https://www.onebillionlabs.com/" }],
     image: "/images/work/one-billion-labs.webp",
     imageAlt: "One Billion Labs website hero: a purple, cyan and pink gradient behind the words One Billion Labs",
     width: 1600,
     height: 1000,
     tone: "#3b1d8f",
-    tags: ["Astro", "TypeScript", "Lenis", "SEO", "Vercel"],
-    links: [{ label: "Live site", href: "https://www.onebillionlabs.com/" }],
   },
   {
     slug: "quintolink",
     title: "Quintolink",
+    group: "featured",
     kind: "Website · Startup",
     year: "2026",
     line: "A studio that prints itself in halftone.",
     description:
       "The website for Quintolink, the startup I co-founded for web development, UI/UX, custom software and apps. Hand-built in HTML, CSS and JavaScript with an animated halftone canvas, Lenis scrolling and local SEO for Sri Lanka.",
+    tech: ["JavaScript", "HTML / CSS", "Canvas", "Lenis", "On-page SEO", "Vercel", "Spaceship"],
+    links: [{ label: "Live site", href: "https://quintolink.com/" }],
     image: "/images/work/quintolink.webp",
     imageAlt: "Quintolink website hero with the word Quinto, a halftone gear graphic and green and black panels",
     width: 1600,
     height: 1000,
     tone: "#0a0b14",
-    tags: ["HTML / CSS / JS", "Canvas", "Lenis", "SEO", "Vercel"],
-    links: [{ label: "Live site", href: "https://quintolink.com/" }],
   },
   {
     slug: "saloon-velora",
     title: "Saloon Velora",
-    kind: "Website · AI",
+    group: "featured",
+    kind: "Website · AI · Client",
     year: "2026",
     line: "A salon site with real-time 3D and an AI beauty assistant.",
     description:
-      "A premium, AI-powered salon website developed with React 19 and TypeScript. It combines luxury design, real-time 3D visuals and an intelligent AI beauty assistant to create an immersive, modern and responsive brand experience.",
+      "A premium salon website for a One Billion Labs client, built with React 19 and TypeScript. Real-time Three.js visuals, a gallery, a booking form and a Gemini-powered beauty assistant that answers questions in the salon's voice.",
+    tech: ["React", "TypeScript", "Vite", "Three.js", "Tailwind CSS", "Gemini", "Google AI Studio", "Firebase"],
+    links: [{ label: "Live site", href: "https://testsaloonvelora.web.app/" }],
     image: "/images/work/saloon-velora.webp",
     imageAlt: "Saloon Velora website homepage with the headline 'Your Beauty Redefined'",
     width: 1813,
     height: 850,
     tone: "#7a2335",
-    tags: ["React 19", "TypeScript", "Firebase", "3D", "AI assistant"],
-    links: [{ label: "Live site", href: "https://testsaloonvelora.web.app/" }],
   },
   {
     slug: "saloon-ceylonima",
     title: "Saloon Ceylonima",
-    kind: "Website · Brand",
+    group: "featured",
+    kind: "Website · AI · Client",
     year: "2026",
     line: "A luxury salon that wanted its website to feel like the chair.",
     description:
-      "A luxury salon website built with React and TypeScript, with refined visuals, elegant typography and smooth interactions. Designed with Tailwind CSS and responsive layouts for a polished, high-end experience on every device.",
+      "A luxury salon website for a One Billion Labs client, built with React and TypeScript: refined visuals, elegant serif typography, smooth interactions and an AI stylist that suggests looks with Gemini. Hosted on Firebase.",
+    tech: ["React", "TypeScript", "Vite", "Tailwind CSS", "Gemini", "Google AI Studio", "Firebase"],
+    links: [{ label: "Live site", href: "https://testsaloonceylonima.web.app/" }],
     image: "/images/work/saloon-ceylonima.webp",
     imageAlt: "Saloon Ceylonima website homepage with the headline 'Crafting Beauty with Passion & Precision'",
     width: 1626,
     height: 810,
     tone: "#6b1f2a",
-    tags: ["React", "TypeScript", "Tailwind CSS", "Firebase", "Brand identity"],
-    links: [{ label: "Live site", href: "https://testsaloonceylonima.web.app/" }],
+  },
+  {
+    slug: "mihirna-banquet-hall",
+    title: "Mihirna Banquet Hall",
+    group: "featured",
+    kind: "Website · Client",
+    year: "2026",
+    line: "A wedding venue in Weliweriya, dressed in gold and ivory.",
+    description:
+      "A multi-page website for a banquet hall in Weliweriya: services, gallery, reviews, facilities and a dedicated accessibility page, with React Router, a gold-and-ivory design system and local SEO for wedding and event searches.",
+    tech: ["React", "TypeScript", "Vite", "React Router", "Tailwind CSS", "On-page SEO", "Google AI Studio"],
+    links: [],
+    note: "Client work · private repo",
+    image: "/images/work/mihirna-banquet-hall.webp",
+    imageAlt: "Mihirna Banquet Hall website hero: 'The Ultimate Venue For Your Grand Celebration' in white and gold",
+    width: 1600,
+    height: 1000,
+    tone: "#2a1d12",
+  },
+  {
+    slug: "megabite",
+    title: "Megabite",
+    group: "featured",
+    kind: "Web app · Mobile-first",
+    year: "2026",
+    line: "Big bite on a tight budget: who paid, who owes.",
+    description:
+      "A mobile-first shared-expense tracker for two roommates. Log who paid and why, see running totals and who owes whom, and watch it sync between phones in real time through Firebase Firestore.",
+    tech: ["React", "TypeScript", "Vite", "Tailwind CSS", "Motion", "Firebase", "Google AI Studio"],
+    links: [],
+    note: "Personal project · private repo",
+    image: "/images/work/megabite.webp",
+    imageAlt: "Megabite app on a phone: totals for M and B, an add-expense form and a list of shared expenses",
+    width: 645,
+    height: 1398,
+    tone: "#0f766e",
+    frame: "phone",
   },
   {
     slug: "sales-shoe-mart",
     title: "Sales Shoe Mart",
+    group: "featured",
     kind: "Mobile app UI",
     year: "2025",
     line: "A shoe store app laid out on the golden ratio.",
     description:
       "A visually balanced Figma mobile UI for a shoe retailer, with golden-ratio layouts, smooth transitions, custom branding and high-quality product visuals tuned for modern phones.",
+    tech: ["Figma"],
+    links: [
+      { label: "Prototype", href: "https://www.figma.com/proto/vplOGgFsPXLNrstrGGs4gL/MAD_lab_test_01" },
+      { label: "Figma file", href: "https://www.figma.com/design/vplOGgFsPXLNrstrGGs4gL/MAD_lab_test_01" },
+    ],
     image: "/images/work/sales-shoe-mart-screens.webp",
     imageAlt: "Sales Shoe Mart mobile app onboarding screens designed in Figma",
     width: 1180,
     height: 538,
     tone: "#1c1917",
-    tags: ["Figma", "UI design", "Prototyping", "Golden ratio"],
-    links: [
-      { label: "Prototype", href: "https://www.figma.com/proto/vplOGgFsPXLNrstrGGs4gL/MAD_lab_test_01" },
-      { label: "Figma file", href: "https://www.figma.com/design/vplOGgFsPXLNrstrGGs4gL/MAD_lab_test_01" },
-    ],
+  },
+
+  /* ---------- engineering & research: the index ---------- */
+  {
+    slug: "smart-campus",
+    title: "Smart Campus Operations Hub",
+    group: "engineering",
+    kind: "Full-stack · University (IT3030 PAF)",
+    year: "2026",
+    line: "Bookings, resources, tickets and notifications for a whole campus, behind Google sign-in.",
+    description:
+      "A full-stack platform for running a university campus: resource catalogue, bookings, maintenance tickets and notifications. A Spring Boot REST API secured with Spring Security, Google OAuth 2.0 and JWT, five roles with an access matrix, Flyway migrations on PostgreSQL and Swagger docs; React + Material UI on the front.",
+    tech: ["Java", "Spring Boot", "Spring Security", "OAuth 2.0", "JWT", "PostgreSQL", "Flyway", "REST APIs", "Swagger / OpenAPI", "SQL", "React", "Vite", "Material UI"],
+    links: [gh("harshalekamge/it3030-paf-2026-smart-campus-group183")],
+    note: "Team project",
+  },
+  {
+    slug: "file-tracking-system",
+    title: "File Tracking System",
+    group: "engineering",
+    kind: "Backend · Internship",
+    year: "2026",
+    line: "Replacing the Record Room's paper logbooks with a digital trail back to the 1900s.",
+    description:
+      "Built during my internship at the Department of the Registrar of Companies: a system to track physical company files in the Record Room. Inventory by year, company and shelf, borrow and return workflows, overdue alerts and a lifetime audit trail per file. Spring Boot REST API on PostgreSQL (Neon), documented with OpenAPI.",
+    tech: ["Java", "Spring Boot", "PostgreSQL", "SQL", "REST APIs", "Swagger / OpenAPI", "Lombok"],
+    links: [],
+    note: "Internal government tool · private repo",
+  },
+  {
+    slug: "eroc-comments",
+    title: "eROC Comment Management System",
+    group: "engineering",
+    kind: "Full-stack · Internship",
+    year: "2026",
+    line: "Standard comments for company registration officers, one click away.",
+    description:
+      "A production-ready system for the eROC (online company registration) team: superadmins, admins and staff manage standardised comments per form and level, search them instantly, edit locally before copying, and keep a floating tool window open beside their work. React + Tailwind on Express and Prisma, JWT auth with bcrypt, installable as a PWA.",
+    tech: ["React", "TypeScript", "Vite", "Tailwind CSS", "Motion", "Node.js", "Express", "Prisma", "SQLite", "SQL", "JWT", "REST APIs"],
+    links: [],
+    note: "Internal government tool · private repo",
+  },
+  {
+    slug: "kola-vision",
+    title: "Kola Vision",
+    group: "engineering",
+    kind: "AI research · Computer vision",
+    year: "2026",
+    line: "The eyes and hands of an accessible AI assistant: it sees the screen and clicks for you.",
+    description:
+      "My part of Kola, a multimodal AI assistant for accessible screen navigation. A YOLO model trained on an auto-labelled dataset finds 24 kinds of YouTube interface elements, OCR reads the text, and an executor moves the mouse to hover and click the element the user asked for, then checks the screen changed. Ships an ONNX model for a light 80 MB install and a browser extension that collects training data.",
+    tech: ["Python", "YOLO", "PyTorch", "ONNX Runtime", "EasyOCR", "Google Colab", "NumPy"],
+    links: [gh("harshalekamge/kola-vision")],
+    note: "Team research project · my module",
+  },
+  {
+    slug: "portfolio",
+    title: "This portfolio",
+    group: "engineering",
+    kind: "Website · Creative code",
+    year: "2026",
+    line: "Ink in WebGL, physics in the footer, and a lot of easing curves.",
+    description:
+      "The site you're on: Next.js with GSAP and Lenis for motion, a WebGL ink simulation, Matter.js physics, Supabase for the contact form and structured data for search.",
+    tech: ["Next.js", "React", "TypeScript", "GSAP", "Lenis", "WebGL", "Supabase", "On-page SEO", "Vercel"],
+    links: [gh("harshalekamge/portfolio")],
+  },
+
+  /* ---------- collaborations ---------- */
+  {
+    slug: "cart-recovery-ai",
+    title: "Shopping Cart Recovery AI",
+    group: "collab",
+    kind: "E-commerce · Information retrieval",
+    year: "2025",
+    line: "Spots abandoned carts and wins them back with the right offer.",
+    description:
+      "An e-commerce store that detects abandoned carts, sends tiered discounts and Gemini-written recovery emails, and recommends products with TF-IDF and cosine similarity. I worked on the recommendation engine, improving it with category-weighted TF-IDF.",
+    tech: ["Python", "Flask", "MySQL", "SQL", "Scikit-learn", "Gemini", "Bootstrap"],
+    links: [gh("ChanithW/Shopping_Cart_Recovery_AI_Project")],
+    note: "With ChanithW and team",
+  },
+  {
+    slug: "offer-suggestor",
+    title: "Offer Suggestor API",
+    group: "collab",
+    kind: "Machine learning · API",
+    year: "2025",
+    line: "Which offer will bring this shopper back? A model decides.",
+    description:
+      "A FastAPI service that predicts which offer an abandoning shopper is most likely to accept, from age, location, item and offer history. I compared Random Forest, Gradient Boosting, Logistic Regression, SVM and KNN before choosing the model.",
+    tech: ["Python", "FastAPI", "Scikit-learn", "Pandas", "NumPy"],
+    links: [{ label: "GitHub", href: "https://github.com/ChanithW/IRWA_Project/tree/harsha" }],
+    note: "With ChanithW and team",
+  },
+  {
+    slug: "restaurant-cancellations",
+    title: "Restaurant Order Cancellation Prediction",
+    group: "collab",
+    kind: "Data science",
+    year: "2026",
+    line: "Flags orders likely to be cancelled before the kitchen starts cooking.",
+    description:
+      "A machine-learning model that predicts restaurant order cancellations from historical orders: cleaning, EDA, feature engineering, Random Forest and XGBoost models, and a Streamlit app to try it.",
+    tech: ["Python", "Pandas", "NumPy", "Scikit-learn", "XGBoost", "Matplotlib", "Seaborn", "Streamlit"],
+    links: [gh("amashi2003/restaurant_orders_cancellation_prediction")],
+    note: "With amashi2003 and team",
+  },
+  {
+    slug: "greencycle",
+    title: "GreenCycle.lk",
+    group: "collab",
+    kind: "Full-stack · Sustainability",
+    year: "2025",
+    line: "Know your plastic footprint, then shrink it.",
+    description:
+      "A plastic-awareness platform for Sri Lanka: a footprint calculator, progress charts, reports as PDFs and email reminders. MERN stack with JWT auth, Chart.js and Recharts.",
+    tech: ["MERN stack", "React", "Node.js", "Express", "MongoDB", "JWT", "Tailwind CSS", "JavaScript"],
+    links: [gh("asjsolo/GreenCycle.lk")],
+    note: "With asjsolo and team",
   },
 ];
+
+export const featuredProjects = projects.filter((p) => p.group === "featured");
 
 export type Experience = {
   role: string;
@@ -222,20 +396,34 @@ export const inkWords: [string, string][] = [
 /** The band that drifts across the page. */
 export const band = ["Front-end", "Data science", "Machine learning", "UI / UX", "Full-stack", "Creative code"];
 
+/**
+ * Skills, tools and technologies. Hover one on the site to see the projects that use it;
+ * those come from each project's `tech` list above (same spelling).
+ */
 export const skills: { group: string; items: string[] }[] = [
-  { group: "Languages", items: ["Python", "Java", "C / C++", "JavaScript", "TypeScript", "SQL", "R"] },
-  { group: "Web & apps", items: ["React", "Next.js", "MERN stack", "Vue.js", "FastAPI", "Tailwind CSS", "HTML / CSS"] },
-  { group: "Data & ML", items: ["NumPy", "Pandas", "Matplotlib", "Scikit-learn", "TensorFlow", "PyTorch", "Django", "Flask"] },
-  { group: "Databases", items: ["MongoDB", "MySQL", "Supabase", "Firebase"] },
-  { group: "Cloud & DevOps", items: ["AWS", "Azure", "Docker", "Kubernetes", "Linux", "Vercel"] },
+  { group: "Languages", items: ["Python", "Java", "C / C++", "JavaScript", "TypeScript", "SQL", "R", "HTML / CSS"] },
+  {
+    group: "Front-end",
+    items: ["React", "Next.js", "Astro", "Vite", "Vue.js", "Tailwind CSS", "Material UI", "Bootstrap", "React Router", "Three.js", "WebGL", "Canvas", "GSAP", "Motion", "Lenis"],
+  },
+  {
+    group: "Back-end & APIs",
+    items: ["Node.js", "Express", "MERN stack", "Spring Boot", "Spring Security", "FastAPI", "Flask", "Django", "REST APIs", "OAuth 2.0", "JWT", "Swagger / OpenAPI", "Lombok"],
+  },
+  {
+    group: "Data & ML",
+    items: ["NumPy", "Pandas", "Matplotlib", "Seaborn", "Scikit-learn", "XGBoost", "TensorFlow", "PyTorch", "YOLO", "ONNX Runtime", "EasyOCR", "Streamlit", "Google Colab"],
+  },
+  { group: "Databases", items: ["PostgreSQL", "MySQL", "MongoDB", "SQLite", "Prisma", "Flyway", "Supabase", "Firebase"] },
+  { group: "Cloud & DevOps", items: ["Vercel", "AWS", "Azure", "Docker", "Kubernetes", "Linux"] },
   { group: "Design", items: ["Figma", "Canva", "Adobe XD", "Sketch", "On-page SEO"] },
-  { group: "AI tools", items: ["OpenAI", "Gemini", "Google AI Studio", "Qwen", "Grok", "Cursor"] },
+  { group: "AI tools", items: ["Gemini", "Google AI Studio", "OpenAI", "Qwen", "Grok", "Cursor"] },
   { group: "Workflow", items: ["Git", "GitHub", "Replit", "Spaceship"] },
 ];
 
 /** Little pills that fall into the footer. */
 export const footerPills = [
-  "React", "Python", "Next.js", "Figma", "SQL", "TypeScript", "ML", "Supabase", "Java", "UI/UX", "Data", "Node.js", "Docker", "AWS",
+  "React", "Python", "Next.js", "Figma", "Spring Boot", "TypeScript", "YOLO", "Supabase", "Java", "UI/UX", "Three.js", "Node.js", "FastAPI", "PostgreSQL",
 ];
 
 export const about = {

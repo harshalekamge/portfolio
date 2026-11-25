@@ -1,4 +1,4 @@
-import { experience, skills } from "@/content/site";
+import { experience } from "@/content/site";
 import Scribble from "./Scribble";
 
 export function Experience() {
@@ -38,33 +38,6 @@ export function Experience() {
           </li>
         ))}
       </ol>
-    </section>
-  );
-}
-
-export function Skills() {
-  return (
-    <section className="skills" id="skills" aria-labelledby="skills-title">
-      <div className="section-head">
-        <p className="label mono">
-          <span>(06)</span> Toolkit
-        </p>
-        <h2 className="section-title" id="skills-title" data-reveal-lines>
-          Skills &amp; technologies
-        </h2>
-      </div>
-      <div className="skills__grid" data-reveal-rule>
-        {skills.map((g) => (
-          <div key={g.group} className="skills__group">
-            <h3 className="mono skills__label">{g.group}</h3>
-            <ul>
-              {g.items.map((s) => (
-                <li key={s}>{s}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
     </section>
   );
 }
