@@ -60,20 +60,20 @@ export const roles: [string, string][] = [
 
 /**
  * Screenshots that cycle inside the two image boxes in the hero (and only there).
- * pos = which part of the screenshot stays in view when it's cropped.
+ * They're shown whole; tone fills any gap if a shot is a different shape from the box.
  */
-export type HeroShot = { src: string; alt: string; tone: string; pos?: string };
+export type HeroShot = { src: string; alt: string; tone: string };
 export const heroShots: { a: HeroShot[]; b: HeroShot[] } = {
   a: [
-    { src: "/images/hero/1b-labs-hero.webp", alt: "One Billion Labs website hero", tone: "#6d28d9", pos: "50% 60%" },
-    { src: "/images/hero/quintolink-hero.webp", alt: "Quintolink website hero", tone: "#0a0b14", pos: "30% 40%" },
-    { src: "/images/hero/quintolink-stack.webp", alt: "Quintolink tech stack section", tone: "#22e3a0", pos: "50% 60%" },
-    { src: "/images/hero/1b-labs-footer.webp", alt: "One Billion Labs website footer", tone: "#ffffff", pos: "40% 70%" },
+    { src: "/images/hero/1b-labs-hero.webp", alt: "One Billion Labs website hero", tone: "#7c3aed" },
+    { src: "/images/hero/quintolink-hero.webp", alt: "Quintolink website hero", tone: "#ffffff" },
+    { src: "/images/hero/quintolink-stack.webp", alt: "Quintolink tech stack section", tone: "#ffffff" },
+    { src: "/images/hero/1b-labs-footer.webp", alt: "One Billion Labs website footer", tone: "#ffffff" },
   ],
   b: [
-    { src: "/images/hero/quintolink-industries.webp", alt: "Quintolink industries section", tone: "#0a0b14", pos: "50% 40%" },
-    { src: "/images/hero/quintolink-about.webp", alt: "Quintolink: Building what's next", tone: "#0a0b14", pos: "20% 30%" },
-    { src: "/images/hero/quintolink-team.webp", alt: "Quintolink contact section", tone: "#ffffff", pos: "50% 40%" },
+    { src: "/images/hero/quintolink-industries.webp", alt: "Quintolink industries section", tone: "#ffffff" },
+    { src: "/images/hero/quintolink-about.webp", alt: "Quintolink: Building what's next", tone: "#ffffff" },
+    { src: "/images/hero/quintolink-team.webp", alt: "Quintolink contact section", tone: "#ffffff" },
   ],
 };
 

@@ -34,7 +34,7 @@ function Slot({ items, className, label, sizes }: { items: HeroShot[]; className
             fill
             sizes={sizes}
             priority={i === 0}
-            style={{ objectFit: "cover", objectPosition: p.pos ?? "50% 30%" }}
+            style={{ objectFit: "contain" }}
           />
         </span>
       ))}

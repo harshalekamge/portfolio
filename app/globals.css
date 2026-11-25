@@ -730,16 +730,14 @@ html.has-ink textarea {
   position: relative;
   display: inline-block;
   flex: none;
-  width: 1.2em;
-  height: 0.7em;
+  /* same shape as the screenshots (about 2.15 : 1), so they show whole, not cropped */
+  height: 0.62em;
+  width: calc(0.62em * 2.15);
   margin-top: 0.02em;
   overflow: hidden;
   border-radius: 0.035em;
   background: var(--ink);
   isolation: isolate;
-}
-.hero__slot--b {
-  width: 1.05em;
 }
 .hero__ph {
   position: absolute;
@@ -2470,13 +2468,13 @@ html.panel-open {
     align-items: flex-start;
   }
   .hero__slot--a {
-    flex: 1;
-    width: auto;
-    height: 0.66em;
+    height: 0.6em;
+    width: calc(0.6em * 2.15);
   }
   .hero__slot--b {
     width: calc(100vw - var(--gut) * 2);
-    height: min(30svh, 64vw);
+    height: auto;
+    aspect-ratio: 2.15;
     margin-top: 0.22em;
     border-radius: 2px;
   }
