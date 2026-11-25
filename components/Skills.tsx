@@ -67,16 +67,6 @@ export default function Skills({ standalone = false }: { standalone?: boolean })
     lastTrigger.current?.focus({ preventScroll: true });
   }, []);
 
-  // arriving with /skills#skill-React opens that skill's panel
-  useEffect(() => {
-    if (!standalone) return;
-    const h = decodeURIComponent(location.hash);
-    if (!h.startsWith("#skill-")) return;
-    const name = h.slice(7);
-    const t = setTimeout(() => openPanel(name, document.getElementById(`skill-${encodeURIComponent(name)}`)), 700);
-    return () => clearTimeout(t);
-  }, [standalone, openPanel]);
-
   // panel: stop the smooth scroller underneath, close on Escape, focus the close button
   useEffect(() => {
     if (!open) return;
@@ -122,33 +112,10 @@ export default function Skills({ standalone = false }: { standalone?: boolean })
           <p className="skills__hint mono">Hover a skill to see where I&apos;ve used it. Click for every project.</p>
         </div>
       )}
-      {standalone && (
-        <div className="skills__top" data-reveal>
-          <p className="mono skills__top-label">Most used</p>
-          <ul>
-            {skills
-              .flatMap((g) => g.items)
-              .map((s) => ({ s, n: projectsFor(s).length }))
-              .sort((a, b) => b.n - a.n)
-              .slice(0, 8)
-              .map(({ s, n }) => (
-                <li key={s}>
-                  <button type="button" className="topskill" onClick={(e) => openPanel(s, e.currentTarget)}>
-                    <span>{s}</span>
-                    <sup className="mono">{n}</sup>
-                  </button>
-                </li>
-              ))}
-          </ul>
-        </div>
-      )}
       <div className="skills__grid" data-reveal-rule>
         {skills.map((g) => (
           <div key={g.group} className="skills__group">
-            <h3 className="mono skills__label">
-              {g.group}
-              {standalone && <span className="skills__gcount">{String(g.items.length).padStart(2, "0")}</span>}
-            </h3>
+            <h3 className="mono skills__label">{g.group}</h3>
             <ul>
               {g.items.map((s) => {
                 const n = projectsFor(s).length;
@@ -156,7 +123,6 @@ export default function Skills({ standalone = false }: { standalone?: boolean })
                   <li key={s}>
                     <button
                       type="button"
-                      id={standalone ? `skill-${encodeURIComponent(s)}` : undefined}
                       className={`skill${n ? "" : " skill--quiet"}`}
                       onPointerEnter={(e) => show(e, s)}
                       onPointerLeave={hideSoon}
