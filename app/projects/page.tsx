@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Reveals from "@/components/Reveals";
 import PageIntro from "@/components/PageIntro";
-import ProjectIndex from "@/components/ProjectIndex";
+import ProjectGrid from "@/components/ProjectGrid";
 import { projects, site } from "@/content/site";
 
 const more = projects.filter((p) => p.group !== "featured");
@@ -26,7 +26,7 @@ export default function ProjectsPage() {
           num="01"
           label="Projects"
           title="More projects"
-          lead="The work where most of the effort lives in the code: back-ends, data models, research and projects built with classmates and friends. Open any row for the full story and the stack."
+          lead="The work where most of the effort lives in the code: back-ends, data models, research, and projects built with classmates and friends. Tap a technology to see everything else I've built with it."
           aside={
             <p className="mono pintro__stats">
               <span>{String(more.filter((p) => p.group === "engineering").length).padStart(2, "0")} engineering &amp; research</span>
@@ -36,7 +36,7 @@ export default function ProjectsPage() {
             </p>
           }
         />
-        <ProjectIndex />
+        <ProjectGrid />
       </main>
       <Footer num="02" />
       <Reveals />

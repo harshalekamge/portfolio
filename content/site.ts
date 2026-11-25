@@ -238,6 +238,7 @@ export const projects: Project[] = [
   /* ---------- engineering & research: the index ---------- */
   {
     slug: "smart-campus",
+    tone: "#1e3a8a",
     title: "Smart Campus Operations Hub",
     group: "engineering",
     kind: "Full-stack · University (IT3030 PAF)",
@@ -251,6 +252,7 @@ export const projects: Project[] = [
   },
   {
     slug: "file-tracking-system",
+    tone: "#3f3a35",
     title: "File Tracking System",
     group: "engineering",
     kind: "Backend · Internship",
@@ -264,6 +266,7 @@ export const projects: Project[] = [
   },
   {
     slug: "eroc-comments",
+    tone: "#0e7490",
     title: "eROC Comment Management System",
     group: "engineering",
     kind: "Full-stack · Internship",
@@ -277,6 +280,7 @@ export const projects: Project[] = [
   },
   {
     slug: "kola-vision",
+    tone: "#4c1d95",
     title: "Kola Vision",
     group: "engineering",
     kind: "AI research · Computer vision",
@@ -290,6 +294,7 @@ export const projects: Project[] = [
   },
   {
     slug: "portfolio",
+    tone: "#2337ff",
     title: "This portfolio",
     group: "engineering",
     kind: "Website · Creative code",
@@ -304,6 +309,7 @@ export const projects: Project[] = [
   /* ---------- collaborations ---------- */
   {
     slug: "cart-recovery-ai",
+    tone: "#9a3412",
     title: "Shopping Cart Recovery AI",
     group: "collab",
     kind: "E-commerce · Information retrieval",
@@ -317,6 +323,7 @@ export const projects: Project[] = [
   },
   {
     slug: "offer-suggestor",
+    tone: "#166534",
     title: "Offer Suggestor API",
     group: "collab",
     kind: "Machine learning · API",
@@ -330,6 +337,7 @@ export const projects: Project[] = [
   },
   {
     slug: "restaurant-cancellations",
+    tone: "#b45309",
     title: "Restaurant Order Cancellation Prediction",
     group: "collab",
     kind: "Data science",
@@ -343,6 +351,7 @@ export const projects: Project[] = [
   },
   {
     slug: "greencycle",
+    tone: "#15803d",
     title: "GreenCycle.lk",
     group: "collab",
     kind: "Full-stack · Sustainability",

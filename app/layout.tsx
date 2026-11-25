@@ -7,6 +7,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import Loader from "@/components/Loader";
 import InkCursor from "@/components/InkCursor";
 import Chrome from "@/components/Chrome";
+import Dock from "@/components/Dock";
 
 const sans = localFont({
   src: [
@@ -127,6 +128,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Chrome />
         <InkCursor />
         {children}
+        <Dock />
       </body>
     </html>
   );

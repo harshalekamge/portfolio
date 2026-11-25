@@ -6,6 +6,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { setupGsap, isStill } from "@/lib/motion";
 import { scrollToId } from "@/lib/scrollTo";
+import { trackReturns, pendingReturn } from "@/lib/returnTo";
 
 declare global {
   interface Window {
@@ -64,6 +65,27 @@ export default function SmoothScroll() {
     };
     document.addEventListener("click", onClick);
 
+    // coming back from /projects or /skills: return to the same spot
+    const untrack = trackReturns();
+    const back = pendingReturn();
+    if (back !== null) {
+      const go = () => {
+        if (lenis) lenis.scrollTo(back, { immediate: true, force: true });
+        else window.scrollTo(0, back);
+        ScrollTrigger.refresh();
+      };
+      go();
+      (document.fonts?.ready ?? Promise.resolve()).then(() => requestAnimationFrame(go));
+      window.addEventListener("load", go, { once: true });
+    }
+    // restored from the back/forward cache: the page is intact, just resync the smooth scroller
+    const onShow = (e: PageTransitionEvent) => {
+      if (!e.persisted || !lenis) return;
+      lenis.resize();
+      lenis.scrollTo(scrollY, { immediate: true, force: true });
+    };
+    window.addEventListener("pageshow", onShow);
+
     // arriving with a #hash (e.g. /projects#project-kola-vision): go there once the page has settled
     if (location.hash.length > 1) {
       const id = decodeURIComponent(location.hash.slice(1));
@@ -82,6 +104,8 @@ export default function SmoothScroll() {
       document.removeEventListener("hl:motion", onMotion);
       document.removeEventListener("hl:intro-done", onIntro);
       document.removeEventListener("click", onClick);
+      window.removeEventListener("pageshow", onShow);
+      untrack();
       window.removeEventListener("load", refresh);
     };
   }, []);
