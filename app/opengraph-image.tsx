@@ -25,7 +25,7 @@ export default async function OG() {
           <div key={i} style={{ position: "absolute", top: 0, bottom: 0, left: 56 + ((1200 - 112) / 12) * (i + 1), width: 1, background: "rgba(20,18,16,.08)" }} />
         ))}
         <div style={{ display: "flex", justifyContent: "space-between", fontFamily: "Mono", fontSize: 18, letterSpacing: 1, textTransform: "uppercase" }}>
-          <span>portfolio.harshalekamge.com</span>
+          <span>www.harshalekamge.com</span>
           <span style={{ display: "flex", alignItems: "center", gap: 10 }}>
             <span style={{ width: 10, height: 10, borderRadius: 10, background: "#22c55e" }} /> {site.available}
           </span>

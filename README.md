@@ -1,6 +1,6 @@
 # Harsha Lekamge — Portfolio
 
-Personal portfolio of Harsha Lekamge, live at **https://portfolio.harshalekamge.com**.
+Personal portfolio of Harsha Lekamge, live at **https://www.harshalekamge.com**.
 
 Built with Next.js (App Router), GSAP, Lenis and Matter.js. Deploys to Vercel.
 
@@ -37,8 +37,9 @@ Without these keys the form still works: it opens the visitor's email app instea
 
 1. Import the repo on vercel.com (framework is detected as Next.js; no settings needed).
 2. Add the two Supabase variables above under **Settings → Environment Variables**.
-3. Add the domain `portfolio.harshalekamge.com` under **Settings → Domains** and point the DNS
-   record your registrar shows (a `CNAME` to `cname.vercel-dns.com`).
+3. Domains (**Settings → Domains**): `www.harshalekamge.com` is the main address.
+   `harshalekamge.com` and the old `portfolio.harshalekamge.com` both 301-redirect to it,
+   so Google moves the old rankings over and only one copy of the site gets indexed.
 
 ## What's in here
 

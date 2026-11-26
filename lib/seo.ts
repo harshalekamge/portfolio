@@ -6,6 +6,7 @@ export function jsonLd() {
     "@type": "Person",
     "@id": `${site.url}/#person`,
     name: site.name,
+    alternateName: ["Harsha", "harshalekamge"],
     givenName: "Harsha",
     familyName: "Lekamge",
     url: `${site.url}/`,
@@ -22,6 +23,12 @@ export function jsonLd() {
       addressCountry: site.countryCode,
     },
     homeLocation: { "@type": "Place", name: site.location },
+    affiliation: {
+      "@type": "CollegeOrUniversity",
+      name: "Sri Lanka Institute of Information Technology",
+      alternateName: "SLIIT",
+      url: "https://www.sliit.lk/",
+    },
     sameAs: socials.filter((s) => s.label !== "WhatsApp").map((s) => s.href),
     worksFor: experience
       .filter((e) => !e.end)
@@ -75,7 +82,8 @@ export function jsonLd() {
         "@type": "WebSite",
         "@id": `${site.url}/#website`,
         url: `${site.url}/`,
-        name: `${site.name} — Portfolio`,
+        name: site.name,
+        alternateName: [`${site.name} — Portfolio`, "harshalekamge.com"],
         description: site.description,
         inLanguage: "en",
         publisher: { "@id": `${site.url}/#person` },
@@ -89,6 +97,14 @@ export function jsonLd() {
         about: { "@id": `${site.url}/#person` },
         mainEntity: { "@id": `${site.url}/#person` },
         primaryImageOfPage: { "@type": "ImageObject", url: `${site.url}${site.portrait}` },
+        breadcrumb: {
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: `${site.url}/` },
+            { "@type": "ListItem", position: 2, name: "Projects", item: `${site.url}/projects` },
+            { "@type": "ListItem", position: 3, name: "Skills", item: `${site.url}/skills` },
+          ],
+        },
         inLanguage: "en",
         dateModified: new Date().toISOString().slice(0, 10),
       },

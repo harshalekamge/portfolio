@@ -4,7 +4,7 @@
  */
 
 export const site = {
-  url: "https://portfolio.harshalekamge.com",
+  url: "https://www.harshalekamge.com",
   name: "Harsha Lekamge",
   shortName: "Harsha",
   initials: "HL",
@@ -23,7 +23,9 @@ export const site = {
     "One Billion Labs",
     "Quintolink",
     "Freelance Web Developer Colombo",
-    "Portfolio",
+    "Harsha Lekamge portfolio",
+    "harshalekamge",
+    "SLIIT Data Science",
   ],
   locale: "en_US",
   location: "Malabe, Sri Lanka",
