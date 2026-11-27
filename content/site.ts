@@ -105,7 +105,8 @@ export type Project = {
   width?: number;
   height?: number;
   tone?: string;
-  frame?: "browser" | "phone";
+  /** browser: a screenshot under a browser bar · phone: one phone screen · screens: a transparent strip of phone mockups */
+  frame?: "browser" | "phone" | "screens";
 };
 
 const gh = (repo: string, label = "GitHub") => ({ label, href: `https://github.com/${repo}` });
@@ -249,11 +250,13 @@ export const projects: Project[] = [
       { label: "Prototype", href: "https://www.figma.com/proto/vplOGgFsPXLNrstrGGs4gL/MAD_lab_test_01" },
       { label: "Figma file", href: "https://www.figma.com/design/vplOGgFsPXLNrstrGGs4gL/MAD_lab_test_01" },
     ],
-    image: "/images/work/sales-shoe-mart-screens.webp",
-    imageAlt: "Sales Shoe Mart mobile app onboarding screens designed in Figma",
-    width: 1180,
-    height: 538,
+    image: "/images/work/sole-mate-screens.webp",
+    imageAlt:
+      "Six screens of the shoe store app designed in Figma: home with new collection, product page with sizes, favourites, cart, side menu and log in",
+    width: 3168,
+    height: 1090,
     tone: "#1c1917",
+    frame: "screens",
   },
 
   /* ---------- engineering & research: the index ---------- */

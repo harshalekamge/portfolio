@@ -11,10 +11,11 @@ type P = (typeof projects)[number];
 
 function Shot({ p }: { p: P }) {
   const phone = p.frame === "phone";
+  const screens = p.frame === "screens";
   return (
     <span className="card__shot">
-      <span className={`card__float${phone ? " card__float--phone" : ""}`}>
-        {!phone && (
+      <span className={`card__float${phone ? " card__float--phone" : ""}${screens ? " card__float--screens" : ""}`}>
+        {!phone && !screens && (
           <span className="card__browser" aria-hidden="true">
             <i />
             <i />
@@ -26,7 +27,7 @@ function Shot({ p }: { p: P }) {
           alt={p.imageAlt ?? p.title}
           width={p.width}
           height={p.height}
-          sizes={phone ? "(max-width: 767px) 60vw, 24vw" : "(max-width: 767px) 88vw, 66vw"}
+          sizes={phone ? "(max-width: 767px) 60vw, 24vw" : screens ? "(max-width: 767px) 96vw, 86vw" : "(max-width: 767px) 88vw, 66vw"}
           className="card__img"
         />
       </span>

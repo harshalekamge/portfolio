@@ -1704,6 +1704,15 @@ html.has-ink textarea {
   border-radius: 3.3cqh;
   box-shadow: none;
 }
+/* a strip of transparent phone mockups: wider than a screenshot, no browser bar or box */
+.card__float--screens {
+  width: min(88cqw, 250cqh);
+}
+.card__float--screens .card__img {
+  border-radius: 0;
+  box-shadow: none;
+  filter: drop-shadow(0 40px 50px rgba(0, 0, 0, 0.5));
+}
 .card__note,
 .prow__note,
 .sk-card__note {
