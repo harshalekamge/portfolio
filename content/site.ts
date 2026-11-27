@@ -10,7 +10,7 @@ export const site = {
   initials: "HL",
   title: "Harsha Lekamge — Software Engineer & Data Scientist, Sri Lanka",
   description:
-    "Harsha Lekamge is a software engineer and data scientist from Sri Lanka, founder & CEO of One Billion Labs and co-founder of Quintolink. Web apps, data science and UI/UX, designed and built end to end.",
+    "Harsha Lekamge is a software engineer and data scientist from Sri Lanka. Web apps, data science and UI/UX, designed and built end to end. See projects, skills and experience.",
   keywords: [
     "Harsha Lekamge",
     "Software Engineer Sri Lanka",

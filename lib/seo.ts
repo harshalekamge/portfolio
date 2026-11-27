@@ -83,7 +83,7 @@ export function jsonLd() {
         "@id": `${site.url}/#website`,
         url: `${site.url}/`,
         name: site.name,
-        alternateName: [`${site.name} — Portfolio`, "harshalekamge.com"],
+        alternateName: [`${site.name} Portfolio`, "Harsha Lekamge — Portfolio"],
         description: site.description,
         inLanguage: "en",
         publisher: { "@id": `${site.url}/#person` },
@@ -97,14 +97,6 @@ export function jsonLd() {
         about: { "@id": `${site.url}/#person` },
         mainEntity: { "@id": `${site.url}/#person` },
         primaryImageOfPage: { "@type": "ImageObject", url: `${site.url}${site.portrait}` },
-        breadcrumb: {
-          "@type": "BreadcrumbList",
-          itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Home", item: `${site.url}/` },
-            { "@type": "ListItem", position: 2, name: "Projects", item: `${site.url}/projects` },
-            { "@type": "ListItem", position: 3, name: "Skills", item: `${site.url}/skills` },
-          ],
-        },
         inLanguage: "en",
         dateModified: new Date().toISOString().slice(0, 10),
       },
